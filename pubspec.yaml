@@ -1,0 +1,84 @@
+name: yumyum
+description: "Delivery food app"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  http:
+  get:
+  sizer:
+  lottie:
+  animated_bottom_navigation_bar:
+  enefty_icons:
+  flutter_slidable:
+  shared_preferences:
+  dartz:
+#  awesome_dialog:
+  carousel_slider:
+#  cached_network_image:
+  google_maps_flutter:
+  geocoding:
+  flutter_polyline_points:
+  badges:
+  jiffy: ^6.2.2
+  url_launcher:
+  rating_dialog:
+  firebase_core:
+  firebase_messaging:
+  firebase_storage:
+  geolocator:
+  cloud_firestore:
+  intl:
+  shimmer:
+  searchfield:
+  geocode:
+  shimmer_image:
+  animated_text_kit:
+  awesome_notifications:
+  in_app_review:
+  share_plus:
+  showcaseview:
+  pinput:
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/appicon.jpg"
+
+
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/lottie/
+
+  fonts:
+    - family: ElMessiri
+      fonts:
+        - asset: assets/fonts/ElMessiri-VariableFont_wght.ttf
+    - family: ProtestRiot
+      fonts:
+        - asset: assets/fonts/ProtestRiot-Regular.ttf
+

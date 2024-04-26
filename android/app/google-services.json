@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "991355742822",
+    "firebase_url": "https://yumyum-6c1ea-default-rtdb.firebaseio.com",
+    "project_id": "yumyum-6c1ea",
+    "storage_bucket": "yumyum-6c1ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991355742822:android:f745cfa13bf69966f05ba7",
+        "android_client_info": {
+          "package_name": "com.example.yumyum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991355742822:android:e8fb8bc04ab04830f05ba7",
+        "android_client_info": {
+          "package_name": "com.example.yumyumadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991355742822:android:15efb08cc771e90df05ba7",
+        "android_client_info": {
+          "package_name": "com.ordernow.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
