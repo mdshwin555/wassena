@@ -1,16 +1,8 @@
-# yumyum
+# Wasswna
 
-Delivery food app
+<div align="center">
+  <img src="https://github.com/mdshwin555/wassena/assets/116727137/8f5df8d8-ae1f-43a1-9eba-794594d44f23" alt="Wasswna Logo" width="100">
+</div>
 
-## Getting Started
+Wasena is an app with which you can easily and quickly request services from shops and restaurants and which also offers the option to order from pharmacies, supermarkets and flower shops via this app.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
