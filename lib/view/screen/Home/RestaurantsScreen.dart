@@ -48,7 +48,7 @@ class RestaurantScreen extends StatelessWidget {
                                   CircleAvatar(
                                     radius: 30.sp,
                                     backgroundColor:
-                                        Color(0xffFF7A2F).withOpacity(0.60),
+                                    AppColor.secondaryColor.withOpacity(0.60),
                                   ),
                                   SizedBox(
                                     height: 1.h,
@@ -56,7 +56,7 @@ class RestaurantScreen extends StatelessWidget {
                                   Container(
                                     height: 2.h,
                                     width: 15.w,
-                                    color: Color(0xffFF7A2F).withOpacity(0.60),
+                                    color: AppColor.secondaryColor.withOpacity(0.60),
                                   ),
                                 ],
                               );
@@ -101,7 +101,7 @@ class RestaurantScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(50.sp),
-                                      color: const Color(0xffFF7A2F)
+                                      color: AppColor.secondaryColor
                                           .withOpacity(0.60),
                                     ),
                                     child: Image.network(
@@ -127,7 +127,7 @@ class RestaurantScreen extends StatelessWidget {
                                     color: myServices.sharedPreferences
                                                 .getInt("selectedcategory") ==
                                             index
-                                        ? Color(0xffFF7A2F)
+                                        ? AppColor.secondaryColor2
                                         : Colors.white,
                                     thickness: 0.3.h,
                                   ),
@@ -537,7 +537,7 @@ class YourShimmerWidget extends StatelessWidget {
                                     color: Colors.blue,
                                     borderRadius: BorderRadius.circular(100.sp),
                                     border: Border.all(
-                                        color: Color(0xffFF7A2F), width: 0.3.w),
+                                        color: AppColor.secondaryColor2, width: 0.3.w),
                                   ),
                                 ),
                                 Positioned(
@@ -612,7 +612,7 @@ class YourShimmerWidget2 extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30.sp,
-                    backgroundColor: Color(0xffFF7A2F).withOpacity(0.60),
+                    backgroundColor: AppColor.secondaryColor.withOpacity(0.60),
                   ),
                   SizedBox(
                     height: 1.h,

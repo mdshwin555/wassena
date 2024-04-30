@@ -11,9 +11,12 @@ import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yumyum/view/screen/Auth/signIn.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/constant/imgaeasset.dart';
 import '../../../core/services/services.dart';
 import 'AbousUs.dart';
 import 'ContactUs.dart';
+import 'JoinUsScreen.dart';
 import 'SavedAddress.dart';
 import 'Terms&Servicescreen.dart';
 
@@ -53,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Text(
                               'تسجيل دخول',
                               style: TextStyle(
-                                color: Color(0xffFF7A2F),
+                                color: AppColor.secondaryColor,
                                 height: 0.2.h,
                                 fontSize: 9.sp,
                                 fontFamily: 'ElMessiri',
@@ -68,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Text(
                               'تسجيل خروج',
                               style: TextStyle(
-                                color: Color(0xffFF7A2F),
+                                color: AppColor.primaryColor,
                                 height: 0.2.h,
                                 fontSize: 9.sp,
                                 fontFamily: 'ElMessiri',
@@ -125,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       backgroundColor:
-                                                          Color(0xffFF7A2F),
+                                                      AppColor.primaryColor,
                                                       shape:
                                                           RoundedRectangleBorder(
                                                         borderRadius:
@@ -164,14 +167,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                 .circular(10),
                                                         border: Border.all(
                                                           color:
-                                                              Color(0xffFF7A2F),
+                                                          AppColor.primaryColor,
                                                           width: 0.3.h,
                                                         )),
                                                     child: Text(
                                                       'لا',
                                                       style: TextStyle(
                                                         color:
-                                                            Color(0xffFF7A2F),
+                                                        AppColor.primaryColor,
                                                         height: 0.2.h,
                                                         fontSize: 15.sp,
                                                         fontWeight:
@@ -248,7 +251,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 4.w,
                     ),
                     CircleAvatar(
-                      backgroundColor: Color(0xffFF7A2F),
+                      backgroundColor: AppColor.primaryColor,
                       radius: 30.sp,
                       child: Icon(
                         EneftyIcons.profile_bold,
@@ -293,7 +296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     Icon(
                                       EneftyIcons.location_bold,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor,
                                     ),
                                     SizedBox(
                                       width: 2.w,
@@ -336,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     Icon(
                                       EneftyIcons.info_circle_bold,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor,
                                     ),
                                     SizedBox(
                                       width: 2.w,
@@ -379,7 +382,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     Icon(
                                       EneftyIcons.note_2_bold,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor,
                                     ),
                                     SizedBox(
                                       width: 2.w,
@@ -425,7 +428,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     Icon(
                                       EneftyIcons.call_calling_bold,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor,
                                     ),
                                     SizedBox(
                                       width: 2.w,
@@ -448,52 +451,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          // Divider(
-                          //   color: Colors.black26,
-                          //   thickness: 0.2.h,
-                          //   indent: 1.w,
-                          //   endIndent: 1.w,
-                          // ),
-                          // SizedBox(
-                          //   height: 2.h,
-                          // ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     Get.to(JoinUsScreen());
-                          //   },
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: [
-                          //       Row(
-                          //         children: [
-                          //           Transform.scale(
-                          //             scale: 1.5,
-                          //             child: Image.asset(
-                          //               AppImageAsset.joinus,
-                          //               height: 3.h,
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             width: 2.w,
-                          //           ),
-                          //           Text(
-                          //             'انضم لنا',
-                          //             style: TextStyle(
-                          //               fontSize: 12.sp,
-                          //               color: Colors.black,
-                          //               fontWeight: FontWeight.bold,
-                          //               fontFamily: 'ElMessiri',
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //       Icon(Icons.navigate_next_sharp)
-                          //     ],
-                          //   ),
-                          // ),
-                          // SizedBox(
-                          //   height: 2.h,
-                          // ),
                           Divider(
                             color: Colors.black26,
                             thickness: 0.2.h,
@@ -505,8 +462,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Share.share(
-                                  'اكتشف التجربة الجديدة مع تطبيق أوردر الآن! احصل على أشهى الوجبات وأجود المنتجات بنقرة واحدة. حمّل التطبيق الآن واستمتع بتجربة تسوق فريدة! https://play.google.com/store/apps/details?id=com.ordernow.app');
+                              Get.to(JoinUsScreen());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.5,
+                                      child: Image.asset(
+                                        AppImageAsset.joinus,
+                                        height: 3.h,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'انضم لنا',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Share.share(' وصينا الحل ,حمل التطبيق الآن 📲\nواستمتع بتجربة تسوق أسهل وأسرع وأكثر متعة واستفد من الخصومات والعروض الحصرية على التطبيق 🛒✨  \nhttps://play.google.com/store/apps/details?id=com.wasena.app ');
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -515,7 +517,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     const Icon(
                                       EneftyIcons.share_bold,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor,
                                     ),
                                     SizedBox(
                                       width: 2.w,
@@ -550,6 +552,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           GestureDetector(
                             onTap: () {
                               openAppReview();
+                              _googlePlay();
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -557,12 +560,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     openAppReview();
+                                    _googlePlay();
                                   },
                                   child: Row(
                                     children: [
                                       const Icon(
                                         EneftyIcons.star_bold,
-                                        color: Color(0xffFF7A2F),
+                                        color: AppColor.secondaryColor,
                                       ),
                                       SizedBox(
                                         width: 2.w,
@@ -607,6 +611,17 @@ void openAppReview() async {
   final InAppReview inAppReview = InAppReview.instance;
 
   if (await inAppReview.isAvailable()) {
+
     inAppReview.requestReview();
-  } else {}
+  } else {
+
+  }
+}
+_googlePlay() async {
+  final uri = Uri.parse('https://play.google.com/store/apps/details?id=com.wasena.app');
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    throw 'Could not launch $uri';
+  }
 }

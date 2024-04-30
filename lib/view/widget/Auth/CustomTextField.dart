@@ -49,7 +49,7 @@ class CustomTextField extends StatelessWidget {
               controller: textfieldcontroller,
               keyboardType: keyboardType,
               maxLength: 10,
-              cursorColor: Color(0xffFF7A2F),
+              cursorColor: AppColor.secondaryColor,
               style: TextStyle( // Define the TextStyle for the entered text
                 fontFamily: 'ElMessiri',
                 fontSize: 11.sp,

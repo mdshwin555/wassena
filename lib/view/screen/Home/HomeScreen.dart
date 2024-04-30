@@ -154,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   const Icon(
                                     Icons.location_on,
-                                    color: Color(0xffFF7A2F),
+                                    color: AppColor.secondaryColor,
                                   ),
                                 ],
                               ),
@@ -362,7 +362,7 @@ class HomeScreen extends StatelessWidget {
                                     child: ProgressiveImage(
                                       width: 90.w,
                                       height: 21.h,
-                                      image: AppImageAsset.shimmarimageeror,
+                                      image: AppImageAsset.loadingimage,
                                       fit: BoxFit.fill,
                                       imageError:
                                           AppImageAsset.shimmarimageeror,
@@ -438,7 +438,7 @@ class HomeScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: controller.currentIndex.value == index
-                                    ? Color(0xffFF7A2F)
+                                    ? AppColor.secondaryColor
                                     : Colors.grey,
                               ),
                             ),
@@ -448,28 +448,29 @@ class HomeScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(5.w, 1.h, 5.w, 0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Row(
-                            //   children: [
-                            //     Icon(
-                            //       Icons.arrow_back_ios_new_outlined,
-                            //       size: 12.sp,
-                            //       color: Color(0xffFF7A2F),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 1.w,
-                            //     ),
-                            //     Text(
-                            //       'عرض الكل',
-                            //       style: TextStyle(
-                            //         fontSize: 11.sp,
-                            //         color: Color(0xffFF7A2F),
-                            //         fontFamily: 'ElMessiri',
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
+                            Row(
+
+                              children: [
+                                Icon(
+                                  Icons.arrow_back_ios_new_outlined,
+                                  size: 12.sp,
+                                  color: AppColor.secondaryColor2,
+                                ),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
+                                Text(
+                                  'عرض الكل',
+                                  style: TextStyle(
+                                    fontSize: 11.sp,
+                                    color: AppColor.secondaryColor2,
+                                    fontFamily: 'ElMessiri',
+                                  ),
+                                ),
+                              ],
+                            ),
                             Text(
                               'ماذا تريد أن تطلب ',
                               style: TextStyle(
@@ -514,7 +515,7 @@ class HomeScreen extends StatelessWidget {
                                       CircleAvatar(
                                         radius: 30.sp,
                                         backgroundColor:
-                                            Color(0xffFF7A2F).withOpacity(0.60),
+                                        AppColor.secondaryColor.withOpacity(0.60),
                                         child: Image.network(
                                           '${AppLink.categories_image}/${controller.categories[index]['categories_image']}',
                                           height: 6.h,
@@ -560,7 +561,7 @@ class HomeScreen extends StatelessWidget {
                                   Icon(
                                     Icons.arrow_back_ios_new_outlined,
                                     size: 12.sp,
-                                    color: Color(0xffFF7A2F),
+                                    color: AppColor.secondaryColor2,
                                   ),
                                   SizedBox(
                                     width: 1.w,
@@ -569,7 +570,7 @@ class HomeScreen extends StatelessWidget {
                                     'عرض الكل',
                                     style: TextStyle(
                                       fontSize: 11.sp,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor2,
                                       fontFamily: 'ElMessiri',
                                     ),
                                   ),
@@ -749,6 +750,7 @@ class HomeScreen extends StatelessWidget {
                                                   child: Image.asset(
                                                     AppImageAsset.addtocart,
                                                     height: 3.5.h,
+
                                                   )),
                                               Row(
                                                 mainAxisAlignment:
@@ -769,8 +771,7 @@ class HomeScreen extends StatelessWidget {
                                                                     .rtl,
                                                             style: TextStyle(
                                                               fontSize: 14.sp,
-                                                              color: Color(
-                                                                  0xffFF7A2F),
+                                                              color: AppColor.primaryColor,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -792,8 +793,7 @@ class HomeScreen extends StatelessWidget {
                                                                     TextStyle(
                                                                   fontSize:
                                                                       10.sp,
-                                                                  color: Color(
-                                                                      0xffFF7A2F),
+                                                                  color: Color(0xff85ac05),
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -892,7 +892,7 @@ class YourShimmerWidget extends StatelessWidget {
                       ),
                       const Icon(
                         Icons.location_on,
-                        color: Color(0xffFF7A2F),
+                        color: AppColor.secondaryColor,
                       ),
                     ],
                   ),
@@ -1114,7 +1114,7 @@ class YourShimmerWidget extends StatelessWidget {
                       Icon(
                         Icons.arrow_back_ios_new_outlined,
                         size: 12.sp,
-                        color: Color(0xffFF7A2F),
+                        color: AppColor.secondaryColor,
                       ),
                       SizedBox(
                         width: 1.w,
@@ -1149,7 +1149,7 @@ class YourShimmerWidget extends StatelessWidget {
                           CircleAvatar(
                             radius: 30.sp,
                             backgroundColor:
-                                Color(0xffFF7A2F).withOpacity(0.60),
+                            AppColor.secondaryColor.withOpacity(0.60),
                           ),
                           SizedBox(
                             height: 1.h,
@@ -1181,7 +1181,7 @@ class YourShimmerWidget extends StatelessWidget {
                       Icon(
                         Icons.arrow_back_ios_new_outlined,
                         size: 12.sp,
-                        color: Color(0xffFF7A2F),
+                        color: AppColor.secondaryColor,
                       ),
                       SizedBox(
                         width: 1.w,

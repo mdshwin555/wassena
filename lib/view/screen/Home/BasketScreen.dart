@@ -150,7 +150,7 @@ class BasketScreen extends StatelessWidget {
                                               SlidableAction(
                                                 onPressed: (a) {},
                                                 backgroundColor:
-                                                Color(0xffFF7A2F),
+                                                AppColor.secondaryColor,
                                                 foregroundColor: Colors.white,
                                                 icon: Icons
                                                     .delete_outline_rounded,
@@ -234,8 +234,7 @@ class BasketScreen extends StatelessWidget {
                                                                     CircleAvatar(
                                                                   radius: 13.sp,
                                                                   backgroundColor:
-                                                                      Color(
-                                                                          0xffFF7A2F),
+                                                                  AppColor.secondaryColor,
                                                                   child: Icon(
                                                                     Icons.add,
                                                                     size: 12.sp,
@@ -272,8 +271,7 @@ class BasketScreen extends StatelessWidget {
                                                                     CircleAvatar(
                                                                   radius: 13.sp,
                                                                   backgroundColor:
-                                                                      Color(
-                                                                          0xffFF7A2F),
+                                                                  AppColor.secondaryColor,
                                                                   child: Icon(
                                                                     Icons
                                                                         .remove,
@@ -336,7 +334,7 @@ class BasketScreen extends StatelessWidget {
                                                 EneftyIcons
                                                     .ticket_discount_bold,
                                                 size: 20.sp,
-                                                color: Color(0xffFF7A2F),
+                                                color: AppColor.secondaryColor,
                                               ),
                                               isDense: true,
                                               contentPadding:
@@ -395,7 +393,7 @@ class BasketScreen extends StatelessWidget {
                                               controller.checkcoupon();
                                             },
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: Color(0xffFF7A2F),
+                                              backgroundColor: AppColor.secondaryColor,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
@@ -531,7 +529,7 @@ class BasketScreen extends StatelessWidget {
                                             Get.to(CheckoutScreen());
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xffFF7A2F),
+                                            backgroundColor: AppColor.primaryColor,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
@@ -647,7 +645,7 @@ class YourShimmerWidget extends StatelessWidget {
                                   children: [
                                     CircleAvatar(
                                       radius: 13.sp,
-                                      backgroundColor: Color(0xffFF7A2F),
+                                      backgroundColor: AppColor.secondaryColor,
                                       child: Icon(
                                         Icons.add,
                                         size: 12.sp,
@@ -667,7 +665,7 @@ class YourShimmerWidget extends StatelessWidget {
                                     ),
                                     CircleAvatar(
                                       radius: 13.sp,
-                                      backgroundColor: Color(0xffFF7A2F),
+                                      backgroundColor: AppColor.secondaryColor,
                                       child: Icon(
                                         Icons.remove,
                                         size: 12.sp,
@@ -716,7 +714,7 @@ class YourShimmerWidget extends StatelessWidget {
                         suffixIcon: Icon(
                           EneftyIcons.ticket_discount_bold,
                           size: 20.sp,
-                          color: Color(0xffFF7A2F),
+                          color: AppColor.secondaryColor,
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.symmetric(

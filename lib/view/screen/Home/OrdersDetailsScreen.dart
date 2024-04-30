@@ -268,7 +268,7 @@ class OrdersDetails extends StatelessWidget {
                                             children: [
                                               const Icon(
                                                 EneftyIcons.location_bold,
-                                                color: Color(0xffFF7A2F),
+                                                color: AppColor.secondaryColor,
                                               ),
                                               Expanded(
                                                 child: Text(
@@ -290,7 +290,7 @@ class OrdersDetails extends StatelessWidget {
                                             children: [
                                               Icon(
                                                 EneftyIcons.call_calling_bold,
-                                                color: Color(0xffFF7A2F),
+                                                color: AppColor.secondaryColor,
                                               ),
                                               Expanded(
                                                 child: Text(
@@ -352,12 +352,12 @@ class OrdersDetails extends StatelessWidget {
                           width: 59.w,
                           // controller.details[0]['orders_rating'] == 0 ? 60.w : 92.w,
                           decoration: BoxDecoration(
-                            color: Color(0xffFF7A2F),
+                            color: AppColor.secondaryColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: controller.details.isEmpty
                               ? CircularProgressIndicator(
-                                  color: Color(0xffFF7A2F),
+                                  color: AppColor.secondaryColor,
                                 )
                               : Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -461,7 +461,7 @@ class OrdersDetails extends StatelessWidget {
                                                             ? Icons.star
                                                             : Icons.star_border,
                                                         color:
-                                                            Color(0xffFF7A2F),
+                                                        AppColor.secondaryColor,
                                                         size: 25.sp),
                                                     onPressed: () {
                                                       setState(() {
@@ -520,7 +520,7 @@ class OrdersDetails extends StatelessWidget {
                                         child: Text(
                                           'إرسال',
                                           style: TextStyle(
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                             fontSize: 13.sp,
                                             fontWeight: FontWeight.bold,
                                             fontFamily: 'ElMessiri',
@@ -540,7 +540,7 @@ class OrdersDetails extends StatelessWidget {
                           width: 30.w,
                           decoration: BoxDecoration(
                             border: Border.all(
-                                color: Color(0xffFF7A2F), width: 0.5.w),
+                                color: AppColor.secondaryColor, width: 0.5.w),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -754,7 +754,7 @@ class YourShimmerWidget2 extends StatelessWidget {
             height: 7.h,
             width: 59.w,
             decoration: BoxDecoration(
-              color: Color(0xffFF7A2F),
+              color: AppColor.secondaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -764,7 +764,7 @@ class YourShimmerWidget2 extends StatelessWidget {
             height: 7.h,
             width: 30.w,
             decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffFF7A2F), width: 0.5.w),
+              border: Border.all(color: AppColor.secondaryColor, width: 0.5.w),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Container(

@@ -41,8 +41,8 @@ class JoinUsScreen extends StatelessWidget {
               ),
             ),
             bottom: TabBar(
-              indicatorColor: Color(0xffFF7A2F),
-              labelColor: Color(0xffFF7A2F),
+              indicatorColor: AppColor.secondaryColor,
+              labelColor: AppColor.secondaryColor,
               labelStyle: TextStyle(
                 fontFamily: 'ElMessiri',
                 fontSize: 9.sp,
@@ -196,7 +196,7 @@ class JoinUsScreen extends StatelessWidget {
                         onPressed: () async {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              backgroundColor: const Color(0xffFF7A2F),
+                              backgroundColor: AppColor.secondaryColor,
                               content: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -356,7 +356,7 @@ class JoinUsScreen extends StatelessWidget {
                         onPressed: () async {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              backgroundColor: const Color(0xffFF7A2F),
+                              backgroundColor: AppColor.secondaryColor,
                               content: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [

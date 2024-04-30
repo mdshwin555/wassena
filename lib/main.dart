@@ -24,8 +24,8 @@ void main() async {
             groupAlertBehavior: GroupAlertBehavior.Children,
             importance: NotificationImportance.High,
             defaultPrivacy: NotificationPrivacy.Private,
-            defaultColor: Colors.orange,
-            ledColor: Colors.orange)
+            defaultColor: Colors.green,
+            ledColor: Colors.green)
       ],
       debug: true);
   await initialServices();

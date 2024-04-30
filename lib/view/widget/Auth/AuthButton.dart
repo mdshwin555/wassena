@@ -23,7 +23,7 @@ class AuthButton extends StatelessWidget {
         ? Padding(
             padding: EdgeInsets.only(left: 39.w),
             child: CircleAvatar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               radius: 20.sp,
               child: const CircularProgressIndicator(color: AppColor.white),
             ),
@@ -35,7 +35,7 @@ class AuthButton extends StatelessWidget {
               height: 7.5.h,
               width: 88.w,
               decoration: BoxDecoration(
-                color: Color(0xffFF7A2F),
+                color: AppColor.secondaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(

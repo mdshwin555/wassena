@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/imgaeasset.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
@@ -119,7 +120,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
       BuildContext context = Get.context!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Color(0xffFF7A2F),
+          backgroundColor: AppColor.secondaryColor,
           content: Text(
             "تمت إضافة المنتجات للسلة !",
             textAlign: TextAlign.right,
@@ -192,7 +193,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Color(0xffFF7A2F),
+            backgroundColor: AppColor.secondaryColor,
             content: Text(
               "تم تقديم تقييمك بنجاح للمنتج. نقدر مشاركتك وتعليقاتك!",
               textAlign: TextAlign.right,
@@ -212,7 +213,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Color(0xffFF7A2F),
+          backgroundColor: AppColor.secondaryColor,
           content: Text(
             "لقد قمت بتقييم هذا المنتج بالفعل",
             textAlign: TextAlign.right,
@@ -250,7 +251,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Color(0xffFF7A2F),
+            backgroundColor: AppColor.secondaryColor,
             content: Text(
               "تمت إزالة العنصر من المفضلة  !",
               textAlign: TextAlign.right,
@@ -324,7 +325,7 @@ class ProductDetailsControllerImp extends ProductDetailsController {
           BuildContext context = Get.context!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               content: Text(
                 "تمت إضافة العنصر إلى المفضلة  !",
                 textAlign: TextAlign.right,

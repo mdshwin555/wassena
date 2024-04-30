@@ -6,6 +6,8 @@ import 'package:sizer/sizer.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import 'package:yumyum/view/screen/Auth/signIn.dart';
 
+import '../../../core/constant/color.dart';
+
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             top: -30.h,
             left: -32.w,
             child: CircleAvatar(
-              backgroundColor: Color(0xffFFE5D7),
+              backgroundColor: AppColor.primaryColor,
               radius: 250.sp,
             ),
           ),
@@ -85,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Text(
                 'skip',
                 style: TextStyle(
-                  color: Color(0xffFF7A2F),
+                  color: AppColor.secondaryColor,
                   fontFamily: 'ElMessiri',
                   fontWeight: FontWeight.bold,
                   fontSize: 13.sp,
@@ -162,7 +164,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               // Change shape to rectangle
               borderRadius: BorderRadius.circular(5.0),
               // Optional: Add border radius for a rounded rectangle
-              color: _currentPage == index ? Color(0xffFF7A2F) : Colors.grey,
+              color: _currentPage == index ? AppColor.secondaryColor : Colors.grey,
             ),
           );
         }),
@@ -190,7 +192,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           height: 7.5.h,
           width: 75.w,
           decoration: BoxDecoration(
-            color: Color(0xffFF7A2F),
+            color: AppColor.secondaryColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(

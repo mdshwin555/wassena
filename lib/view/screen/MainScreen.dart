@@ -67,10 +67,10 @@ class MainScreen extends StatelessWidget {
               controller.bottomNavIndex.value = 5;
               controller.updateisHome(true);
             },
-            backgroundColor: Color(0xffFF7A2F),
+            backgroundColor: AppColor.primaryColor,
             child: ColorFiltered(
               colorFilter: ColorFilter.mode(
-                Colors.white,
+                AppColor.secondaryColor,
                 BlendMode.srcIn,
               ),
               child: Transform.scale(
@@ -101,7 +101,7 @@ class MainScreen extends StatelessWidget {
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
           itemCount: icons_outline.length,
           tabBuilder: (int index, bool isActive) {
-            final color = isActive ? const Color(0xffFF7A2F) : Colors.grey;
+            final color = isActive ?  AppColor.secondaryColor : Colors.grey;
             return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

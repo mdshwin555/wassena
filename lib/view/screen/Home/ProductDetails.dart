@@ -9,6 +9,7 @@ import 'package:yumyum/controller/Home/ProductDetailsController.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import '../../../controller/Home/ItemsController.dart';
 import '../../../core/class/statusrequest.dart';
+import '../../../core/constant/color.dart';
 import '../../../core/constant/linkapi.dart';
 import '../../../core/services/services.dart';
 
@@ -79,7 +80,7 @@ class ProductDetails extends StatelessWidget {
                                 },
                                 child: CircleAvatar(
                                   radius: 18.sp,
-                                  backgroundColor: Color(0xffFF7A2F),
+                                  backgroundColor: Colors.white,
                                   child: Icon(
                                     controller.isFavorite!
                                         ? Icons.favorite
@@ -99,7 +100,7 @@ class ProductDetails extends StatelessWidget {
                                 },
                                 child: CircleAvatar(
                                   radius: 18.sp,
-                                  backgroundColor: Color(0xffFF7A2F),
+                                  backgroundColor: AppColor.secondaryColor,
                                   child: Icon(
                                     Icons.arrow_forward_ios_outlined,
                                     size: 20.sp,
@@ -172,20 +173,20 @@ class ProductDetails extends StatelessWidget {
                                         if (index < rating.floor()) {
                                           return Icon(
                                             Icons.star,
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                             size: 23.sp,
                                           );
                                         } else if (index == rating.floor() &&
                                             rating % 1 != 0) {
                                           return Icon(
                                             Icons.star_half,
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                             size: 23.sp,
                                           );
                                         } else {
                                           return Icon(
                                             Icons.star_outline,
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                             size: 23.sp,
                                           );
                                         }
@@ -193,7 +194,7 @@ class ProductDetails extends StatelessWidget {
                                         // Display outlined star for unrated stars or when avg_rating is null
                                         return Icon(
                                           EneftyIcons.star_outline,
-                                          color: Color(0xffFF7A2F),
+                                          color: AppColor.secondaryColor,
                                           size: 18.sp,
                                         );
                                       }
@@ -308,7 +309,7 @@ class ProductDetails extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
                                   fontSize: 14.sp,
-                                  color: Color(0xffFF7A2F),
+                                  color: AppColor.secondaryColor2,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'ElMessiri',
                                 ),
@@ -321,7 +322,7 @@ class ProductDetails extends StatelessWidget {
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                       fontSize: 14.sp,
-                                      color: Color(0xffFF7A2F),
+                                      color: AppColor.secondaryColor2,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'ElMessiri',
                                     ),
@@ -346,7 +347,7 @@ class ProductDetails extends StatelessWidget {
                               },
                               child: CircleAvatar(
                                 radius: 15.sp,
-                                backgroundColor: Color(0xffFF7A2F),
+                                backgroundColor: AppColor.primaryColor,
                                 child: Icon(
                                   Icons.add,
                                   size: 12.sp,
@@ -374,7 +375,7 @@ class ProductDetails extends StatelessWidget {
                               },
                               child: CircleAvatar(
                                 radius: 15.sp,
-                                backgroundColor: Color(0xffFF7A2F),
+                                backgroundColor: AppColor.primaryColor,
                                 child: Icon(
                                   Icons.remove,
                                   size: 12.sp,
@@ -487,7 +488,7 @@ class ProductDetails extends StatelessWidget {
                                                                       index < controller.selectedRating.value
                                                                           ? EneftyIcons.star_bold
                                                                           : EneftyIcons.star_outline,
-                                                                      color: Color(0xffFF7A2F),
+                                                                      color: AppColor.secondaryColor,
                                                                       size: 25.sp),
                                                                   onPressed:
                                                                       () {
@@ -540,7 +541,7 @@ class ProductDetails extends StatelessWidget {
                                               child: Text(
                                                 'إرسال',
                                                 style: TextStyle(
-                                                  color: Color(0xffFF7A2F),
+                                                  color: AppColor.secondaryColor,
                                                   fontSize: 13.sp,
                                                   fontWeight:
                                                       FontWeight.bold,
@@ -562,7 +563,7 @@ class ProductDetails extends StatelessWidget {
                         width: 25.w,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Color(0xffFF7A2F), width: 0.5.w),
+                              color: AppColor.secondaryColor, width: 0.5.w),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -570,7 +571,7 @@ class ProductDetails extends StatelessWidget {
                           children: [
                             Icon(
                               EneftyIcons.star_bold,
-                              color: Color(0xffFF7A2F),
+                              color: AppColor.secondaryColor,
                               size: 20.sp,
                             ),
                             SizedBox(
@@ -605,7 +606,7 @@ class ProductDetails extends StatelessWidget {
                           height: 7.h,
                           width: 64.w,
                           decoration: BoxDecoration(
-                            color: Color(0xffFF7A2F),
+                            color: AppColor.secondaryColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: controller.statusRequest ==
@@ -673,7 +674,7 @@ class YourShimmerWidget extends StatelessWidget {
                   left: 5.w,
                   child: CircleAvatar(
                     radius: 18.sp,
-                    backgroundColor: Color(0xffFF7A2F),
+                    backgroundColor: AppColor.secondaryColor,
                   ),
                 ),
                 Positioned(
@@ -681,7 +682,7 @@ class YourShimmerWidget extends StatelessWidget {
                   right: 5.w,
                   child: CircleAvatar(
                     radius: 18.sp,
-                    backgroundColor: Color(0xffFF7A2F),
+                    backgroundColor: AppColor.secondaryColor,
                   ),
                 ),
               ],
@@ -737,14 +738,14 @@ class YourShimmerWidget extends StatelessWidget {
                             // Display bold star for each rated star
                             return Icon(
                               EneftyIcons.star_bold,
-                              color: Color(0xffFF7A2F),
+                              color: AppColor.secondaryColor,
                               size: 18.sp,
                             );
                           } else {
                             // Display outlined star for unrated stars
                             return Icon(
                               EneftyIcons.star_outline,
-                              color: Color(0xffFF7A2F),
+                              color: AppColor.secondaryColor,
                               size: 18.sp,
                             );
                           }
@@ -807,7 +808,7 @@ class YourShimmerWidget extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 15.sp,
-                        backgroundColor: Color(0xffFF7A2F),
+                        backgroundColor:AppColor.secondaryColor,
                       ),
                       SizedBox(
                         width: 3.w,
@@ -822,7 +823,7 @@ class YourShimmerWidget extends StatelessWidget {
                       ),
                       CircleAvatar(
                         radius: 15.sp,
-                        backgroundColor: Color(0xffFF7A2F),
+                        backgroundColor: AppColor.secondaryColor,
                       ),
                     ],
                   ),

@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yumyum/core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/Home/address.dart';
@@ -33,7 +34,7 @@ class AddressController extends GetxController {
   double? lat;
   double? long;
   Position? position;
-  Color buttonColor = Color(0xffFF7A2F);
+  Color buttonColor = AppColor.secondaryColor;
 
   bool isMarkerWithinCircle(LatLng markerPosition) {
     LatLng circleCenter = LatLng(35.955069, 39.011858);
@@ -46,8 +47,8 @@ class AddressController extends GetxController {
   }
 
   void setButtonColor(Color color) {
-    if (color == Color(0xffFF7A2F)) {
-      buttonColor = Color(0xffFF7A2F);
+    if (color == AppColor.secondaryColor) {
+      buttonColor = AppColor.secondaryColor;
       update();
     } else {
       buttonColor = Colors.grey;
@@ -184,7 +185,7 @@ class AddressController extends GetxController {
     addMarkers(latLng);
     moveCameraTo(latLng);
     if (isMarkerWithinCircle(latLng)) {
-      setButtonColor(Color(0xffFF7A2F));
+      setButtonColor(AppColor.secondaryColor);
     } else {
       setButtonColor(Colors.grey);
     }

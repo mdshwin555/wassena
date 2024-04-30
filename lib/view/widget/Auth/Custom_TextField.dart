@@ -59,7 +59,7 @@ class CustomTextField2 extends StatelessWidget {
                   validator: valid,
                   controller: controller,
                   keyboardType: keyboardType,
-                  cursorColor: Color(0xffFF7A2F),
+                  cursorColor: AppColor.secondaryColor,
                   obscureText: isPassword
                       ? signInController.isPasswordVisible == true.obs
                       ? false
@@ -78,7 +78,7 @@ class CustomTextField2 extends StatelessWidget {
                     ),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color:Color(0xffFF7A2F),),
+                      borderSide: BorderSide(color:AppColor.secondaryColor,),
                     ),
                     errorBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -106,7 +106,7 @@ class CustomTextField2 extends StatelessWidget {
                             : EneftyIcons.eye_slash_outline,
                         color:
                         signInController.isPasswordVisible == true.obs
-                            ? Color(0xffFF7A2F)
+                            ? AppColor.secondaryColor
                             : AppColor.grey.withOpacity(0.70),
                       ),
                     )

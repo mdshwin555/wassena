@@ -48,12 +48,18 @@ dependencies:
   share_plus:
   showcaseview:
   pinput:
+  flutter_launcher_icons: ^0.13.1
+  audioplayers: ^6.0.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+flutter_icons:
+  android: true
+  image_path: "assets/images/appicon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/2024.png"
 
 
   flutter_launcher_icons: ^0.13.1
@@ -61,7 +67,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/appicon.jpg"
+  image_path: "assets/images/appicon.png"
 
 
 
@@ -73,6 +79,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
+    - assets/audios/
 
   fonts:
     - family: ElMessiri

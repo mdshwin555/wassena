@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -92,28 +93,8 @@ class SignUpControllerImp extends SignUpController {
         if (response['status'] == true) {
 
           BuildContext context = Get.context!;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.green,
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "تم تسجيل الدخول بنجاح ! ",
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 9.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'ElMessiri',
-                    ),
-                  ),
-                ],
-              ),
-              duration: Duration(seconds: 2),
-            ),
-          );
+          AudioPlayer().play(AssetSource('audios/system.mp3'));
+
           myServices.sharedPreferences
               .setString("token", response['data']['users_password']);
           myServices.sharedPreferences
@@ -134,7 +115,7 @@ class SignUpControllerImp extends SignUpController {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    " لقد تم حظر حسابك من التطبيق ! ",
+                    " لقد تم حظر حسابك من الوصول الى التطبيق ! ",
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.rtl,
                     style: TextStyle(

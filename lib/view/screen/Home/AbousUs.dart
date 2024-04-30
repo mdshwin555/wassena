@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../core/constant/color.dart';
 import '../../../core/constant/imgaeasset.dart';
 
 class AboutUs extends StatelessWidget {
@@ -22,16 +23,16 @@ class AboutUs extends StatelessWidget {
               width: 140.w,
               height: 60.h,
               decoration: BoxDecoration(
-                  color: const Color(0xffFF7A2F),
+                  color:  AppColor.secondaryColor,
                   borderRadius: BorderRadius.circular(300.sp)),
             ),
           ),
           Positioned(
             top: 45.h,
             child: Text(
-              'Order Now',
+              'Wasena',
               style: TextStyle(
-                color: Color(0xffFF7A2F),
+                color: AppColor.secondaryColor,
                 fontFamily: 'ProtestRiot',
                 fontSize: 25.sp,
                 fontWeight: FontWeight.bold,
@@ -42,7 +43,7 @@ class AboutUs extends StatelessWidget {
           Positioned(
             top: 51.h,
             child: Text(
-              'Developed by Eng.AL Mouayad Shwin ©',
+              'Developed by Wasena ©',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 6.sp,
@@ -105,7 +106,7 @@ class AboutUs extends StatelessWidget {
             child: Container(
               width: 90.w,
               child: Text(
-                'version 1.0.0',
+                'version 2.0.1',
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
                 style: TextStyle(

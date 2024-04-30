@@ -66,7 +66,7 @@ class ContactUs extends StatelessWidget {
                           color: Colors.black,
                         ),
                         controller: controller.title,
-                        cursorColor: Color(0xffFF7A2F),
+                        cursorColor: AppColor.secondaryColor,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 1.5.h, horizontal: 3.5.w),
@@ -85,7 +85,7 @@ class ContactUs extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(
-                              color: Color(0xffFF7A2F),
+                              color: AppColor.secondaryColor,
                             ),
                           ),
                           hintText: 'الموضوع',
@@ -115,7 +115,7 @@ class ContactUs extends StatelessWidget {
                         ),
                         controller: controller.subject,
                         maxLines: 5,
-                        cursorColor: Color(0xffFF7A2F),
+                        cursorColor: AppColor.secondaryColor,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 1.5.h, horizontal: 3.5.w),
@@ -134,7 +134,7 @@ class ContactUs extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(
-                              color: Color(0xffFF7A2F),
+                              color: AppColor.secondaryColor,
                             ),
                           ),
                           hintText: 'نص الرسالة',
@@ -165,7 +165,7 @@ class ContactUs extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: controller.statusRequest == StatusRequest.loading
                             ? Colors.grey
-                            : Color(0xffFF7A2F),
+                            : AppColor.secondaryColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: controller.statusRequest == StatusRequest.loading
@@ -195,7 +195,7 @@ class ContactUs extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           await launchUrl(Uri.parse(
-                              "fb://facewebmodal/f?href=https://www.facebook.com/profile.php?id=61556808508109"));
+                              "https://m.facebook.com/wasena.hon/"));
                         },
                         child: Image.asset(
                           AppImageAsset.facebook,
@@ -208,7 +208,7 @@ class ContactUs extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           await launchUrl(Uri.parse(
-                              "whatsapp://send?phone=+963968557674&text=مرحبا"));
+                              "whatsapp://send?phone=+963992373318&text=مرحبا"));
                         },
                         child: Image.asset(
                           AppImageAsset.whatsapp,
@@ -220,7 +220,7 @@ class ContactUs extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          await launchUrl(Uri.parse("tel:0958768548"));
+                          await launchUrl(Uri.parse("tel:0992373318"));
                         },
                         child: Image.asset(
                           AppImageAsset.phone,

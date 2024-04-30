@@ -95,7 +95,7 @@ class RestaurantsItemsScreen extends StatelessWidget {
                                   },
                                   child: CircleAvatar(
                                     radius: 18.sp,
-                                    backgroundColor: Color(0xffFF7A2F),
+                                    backgroundColor: AppColor.secondaryColor,
                                     child: Icon(
                                       Icons.arrow_back_ios_new,
                                       size: 12.sp,
@@ -247,9 +247,9 @@ class RestaurantsItemsScreen extends StatelessWidget {
                                           children: [
                                             Icon(
                                               EneftyIcons.map_2_bold,
-                                              color: Color(0xffFF7A2F),
-                                              size: 19.sp,
-                                            ),
+                                              color: AppColor.secondaryColor,
+                                                size: 19.sp,
+                                              ),
                                             SizedBox(
                                               width: 1.w,
                                             ),
@@ -586,7 +586,7 @@ class RestaurantsItemsScreen extends StatelessWidget {
                                                                             style:
                                                                                 TextStyle(
                                                                               fontSize: 10.sp,
-                                                                              color: const Color(0xffFF7A2F),
+                                                                              color: AppColor.secondaryColor2,
                                                                               fontWeight: FontWeight.bold,
                                                                               fontFamily: 'ElMessiri',
                                                                             ),
@@ -601,7 +601,7 @@ class RestaurantsItemsScreen extends StatelessWidget {
                                                                                   textDirection: TextDirection.rtl,
                                                                                   style: TextStyle(
                                                                                     fontSize: 10.sp,
-                                                                                    color: const Color(0xffFF7A2F),
+                                                                                    color: AppColor.secondaryColor2,
                                                                                     fontWeight: FontWeight.bold,
                                                                                     fontFamily: 'ElMessiri',
                                                                                   ),
@@ -707,7 +707,7 @@ class YourShimmerWidget extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(100.sp),
                                         border: Border.all(
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                             width: 0.3.w),
                                       ),
                                     ),

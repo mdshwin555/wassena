@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/Home/cart.dart';
@@ -97,7 +98,7 @@ class FavoriteControllerImp extends FavoriteController {
           BuildContext context = Get.context!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               content: Text(
                 "تمت إضافة المنتجات للسلة !",
                 textAlign: TextAlign.right,
@@ -137,7 +138,7 @@ class FavoriteControllerImp extends FavoriteController {
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Color(0xffFF7A2F),
+            backgroundColor: AppColor.secondaryColor,
             content: Text(
               "تمت إزالة العنصر من المفضلة  !",
               textAlign: TextAlign.right,

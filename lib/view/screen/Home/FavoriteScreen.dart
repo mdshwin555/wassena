@@ -267,7 +267,7 @@ class FavoriteScreen extends StatelessWidget {
                                                       style: TextStyle(
                                                         fontSize: 10.sp,
                                                         color: const Color(
-                                                            0xffFF7A2F),
+                                                            0xffbbd469),
                                                         fontWeight:
                                                         FontWeight.bold,
                                                         fontFamily:
@@ -290,7 +290,7 @@ class FavoriteScreen extends StatelessWidget {
                                                               fontSize:
                                                               10.sp,
                                                               color: const Color(
-                                                                  0xffFF7A2F),
+                                                                  0xffbbd469),
                                                               fontWeight:
                                                               FontWeight
                                                                   .bold,

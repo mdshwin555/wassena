@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yumyum/view/screen/MainScreen.dart';
 
 import '../../../controller/Auth/SignUp_Controller.dart';
+import '../../../core/constant/color.dart';
 
 class CustomPinInput extends StatelessWidget {
   final TextEditingController otpController;
@@ -44,7 +45,7 @@ class CustomPinInput extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1.5,
-                  color: Color(0xffEC441E),
+                  color: AppColor.secondaryColor,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),

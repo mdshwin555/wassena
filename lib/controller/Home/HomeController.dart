@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/Home/Offers.dart';
@@ -183,7 +184,7 @@ class HomeControllerImp extends HomeController {
           BuildContext context = Get.context!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               content: Text(
                 "تمت إضافة المنتجات للسلة !",
                 textAlign: TextAlign.right,

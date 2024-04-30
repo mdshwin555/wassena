@@ -13,6 +13,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import 'package:yumyum/view/screen/Home/OrdersScreen.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/Home/orders.dart';
@@ -310,7 +311,7 @@ class OrdersControllerImp extends OrdersController {
     }
     Polyline polyLine = Polyline(
       polylineId: PolylineId("wael"),
-      color: Color(0xffFF7A2F),
+      color: AppColor.secondaryColor,
       width: 4,
       points: polylineco,
     );
@@ -408,7 +409,7 @@ class OrdersControllerImp extends OrdersController {
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Color(0xffFF7A2F),
+            backgroundColor: AppColor.secondaryColor,
             content: Text(
               "تم إلغاء الطلب بنجاح نعتذر على التأخيرس!",
               textAlign: TextAlign.right,

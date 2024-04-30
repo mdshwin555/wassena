@@ -3,7 +3,7 @@ class AppImageAsset {
   static const String rootImages = "assets/images";
   static const String rootLottie = "assets/lottie";
   // =============================== Images ========================== //
-  static const String logo = "$rootImages/yumyum.png";
+  static const String logo = "$rootImages/icon.png";
   static const String splash = "$rootImages/splash.jpeg";
   static const String pizzaorder = "$rootImages/pizzaorder.jpg";
   static const String burgerorder = "$rootImages/burgerorder.jpg";
@@ -18,9 +18,10 @@ class AppImageAsset {
   static const String addtocart = "$rootImages/addtocart.png";
   static const String wallpaper = "$rootImages/wallpaper.jpg";
   static const String splashfastmart = "$rootImages/splashfastmart.gif";
-  static const String shimmarimageeror = "$rootImages/icon.png";
+  static const String shimmarimageeror = "$rootImages/loadingError.jpg";
+  static const String loadingimage = "$rootImages/loadingimage.jpg";
   static const String joinus = "$rootImages/joinus.png";
-  static const String appicon = "$rootImages/appicon.jpg";
+  static const String appicon = "$rootImages/appicon.png";
   static const String contact_us = "$rootImages/contact_us.png";
   static const String facebook = "$rootImages/facebook.png";
   static const String whatsapp = "$rootImages/whatsapp.png";
@@ -45,6 +46,7 @@ class AppImageAsset {
   static const String noorders = "$rootLottie/noorders2.json";
   static const String ordersuccssecful = "$rootLottie/ordersuccssecful.json";
   static const String emptyitems = "$rootLottie/emptyitems.json";
+  static const String loadingmap = "$rootLottie/loadingmap.json";
   static const String emptyaddress = "$rootLottie/emptyaddress.json";
   static const String nonotifications = "$rootLottie/nonotifications.json";
   static const String emptycart = "$rootLottie/emptycart.json";

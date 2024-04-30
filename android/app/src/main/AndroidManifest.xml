@@ -25,9 +25,9 @@
 
 
     <application
-        android:label="OrderNow"
+        android:label="Wasena"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

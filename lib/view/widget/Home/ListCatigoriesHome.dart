@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yumyum/controller/Home/HomeController.dart';
 
+import '../../../core/constant/color.dart';
 import '../../../core/constant/linkapi.dart';
 
 class ListCatigoriesHome extends GetView<HomeControllerImp> {
@@ -29,7 +30,7 @@ class ListCatigoriesHome extends GetView<HomeControllerImp> {
                     CircleAvatar(
                       radius: 30.sp,
                       backgroundColor:
-                      Color(0xffFF7A2F).withOpacity(0.60),
+                      AppColor.secondaryColor.withOpacity(0.60),
                       child: Image.network(
                         '${AppLink.categories_image}/${controller.categories[index]['categories_image']}',
                         height: 6.h,

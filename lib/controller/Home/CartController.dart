@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yumyum/view/screen/Home/OrdersDetailsScreen.dart';
 import 'package:yumyum/view/screen/MainScreen.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/imgaeasset.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
@@ -280,7 +281,7 @@ class CartControllerImp extends CartController {
                             Get.off(OrdersDetails());
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffFF7A2F),
+                            backgroundColor: AppColor.secondaryColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -306,7 +307,7 @@ class CartControllerImp extends CartController {
                           'الرجوع',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.orange,
+                            color: Colors.green,
                             fontFamily: 'ElMessiri',
                           ),
                         ),

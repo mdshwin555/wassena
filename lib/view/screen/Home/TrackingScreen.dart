@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yumyum/controller/Home/OrdersController.dart';
+import '../../../core/constant/color.dart';
 import '../../../core/services/services.dart';
 
 class TrackingScreen extends StatelessWidget {
@@ -38,7 +39,7 @@ class TrackingScreen extends StatelessWidget {
               right: 5.w,
               child: CircleAvatar(
                 radius: 17.sp,
-                backgroundColor: Color(0xffFF7A2F),
+                backgroundColor: AppColor.secondaryColor,
                 child: IconButton(
                   onPressed: () {
                     Get.back();
@@ -132,7 +133,7 @@ class TrackingScreen extends StatelessWidget {
                           width: 85.w,
                           margin: EdgeInsets.fromLTRB(0, 2.h, 5.w, 0),
                           decoration: BoxDecoration(
-                            color: Color(0xffFF7A2F),
+                            color: AppColor.secondaryColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -152,7 +153,7 @@ class TrackingScreen extends StatelessWidget {
           ],
         )
             : Center(child: CircularProgressIndicator(
-          color: Color(0xffFF7A2F),
+          color: AppColor.secondaryColor,
         )),
       ),
     );

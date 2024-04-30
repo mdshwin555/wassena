@@ -107,7 +107,7 @@ class NotificationsScreen extends StatelessWidget {
                                             ['notification_title'] ==
                                         'بدء التوصيل'
                                     ? CircleAvatar(
-                                        backgroundColor: Color(0xffFF7A2F),
+                                        backgroundColor: AppColor.secondaryColor,
                                         radius: 15.sp,
                                         child: Icon(
                                           Icons.directions_bike_rounded,
@@ -145,7 +145,7 @@ class NotificationsScreen extends StatelessWidget {
                             trailing: Text(
                               ' ${Jiffy.parse('${controller.notifications[index]['notification_date']}').fromNow()}',
                               style: const TextStyle(
-                                color: Color(0xffFF7A2F),
+                                color: AppColor.secondaryColor,
                                 fontFamily: 'ElMessiri',
                               ),
                             ),

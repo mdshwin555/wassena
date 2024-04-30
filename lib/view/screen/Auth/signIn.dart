@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yumyum/core/constant/color.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import 'package:yumyum/view/screen/Auth/otp.dart';
 import 'package:yumyum/view/screen/Home/Terms&Servicescreen.dart';
@@ -38,30 +39,30 @@ class SignInScreen extends StatelessWidget {
                   width: 140.w,
                   height: 60.h,
                   decoration: BoxDecoration(
-                      color: const Color(0xffFF7A2F).withOpacity(0.90),
+                      color:  AppColor.primaryColor.withOpacity(0.90),
                       borderRadius: BorderRadius.circular(300.sp)),
                 ),
               ),
               Positioned(
-                top: 5.h,
+                top: 7.h,
                 right: 11.w,
                 child: Row(
                   children: [
                     Text(
-                      'أطلب الآن',
+                      'تسجيل الدخول',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'ElMessiri',
-                        fontSize: 23.sp,
+                        fontSize: 21.sp,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 5,
                       ),
                     ),
-                    Transform.translate(
-                      offset: Offset(0, 1.3.h),
-                      child:
-                      Lottie.asset(AppImageAsset.splashlogo, height: 13.h),
-                    ),
+                    // Transform.translate(
+                    //   offset: Offset(0, 1.3.h),
+                    //   child:
+                    //   Image.asset(AppImageAsset.appicon, height: 9.h),
+                    // ),
                   ],
                 ),
               ),
@@ -98,23 +99,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Positioned(
-              //   top: 53.h,
-              //   left: 0.w,
-              //   child: Directionality(
-              //     textDirection: TextDirection.rtl,
-              //     child: CustomTextField2(
-              //       valid: (val) {
-              //         return validInput(val!, 8, 25, "password");
-              //       },
-              //       controller: controller.password,
-              //       keyboardType: TextInputType.visiblePassword,
-              //       labelText: 'كلمة المرور',
-              //       hintText: '***********************',
-              //       isPassword: true,
-              //     ),
-              //   ),
-              // ),
+
               Positioned(
                 top: 73.h, // Adjust the position based on your layout
                 left: 0.w,
@@ -134,7 +119,7 @@ class SignInScreen extends StatelessWidget {
                           text: 'سياسية الخصوصية والاستخدام',
                           style: const TextStyle(
                             decoration: TextDecoration.underline,
-                            color: Colors.orange,
+                            color: AppColor.secondaryColor,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
@@ -170,7 +155,7 @@ class SignInScreen extends StatelessWidget {
                     // );
                     //loginUser('+963958768548',context);
                     if (controller.form.currentState!.validate()) {
-                      Get.to(OtpScreen());
+                      Get.to(OtpScreen(number: controller.phone.text,));
                     }
                   },
                 ),
@@ -186,7 +171,7 @@ class SignInScreen extends StatelessWidget {
                       child: const Text(
                         '  الدخول كزائر',
                         style: TextStyle(
-                          color: Colors.orange,
+                          color: AppColor.secondaryColor,
                           fontFamily: 'ElMessiri',
                         ),
                       ),

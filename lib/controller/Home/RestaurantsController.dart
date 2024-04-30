@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/Home/cart.dart';
@@ -303,7 +304,7 @@ class RestaurantsControllerImp extends RestaurantsController {
           BuildContext context = Get.context!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               content: Text(
                 "تمت الإضافة للسلة !",
                 style: TextStyle(

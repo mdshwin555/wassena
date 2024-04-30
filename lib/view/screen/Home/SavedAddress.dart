@@ -55,9 +55,12 @@ class SavedAddress extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                Lottie.asset(
-                  AppImageAsset.emptyaddress,
-                  height: 25.h,
+                Padding(
+                  padding: const EdgeInsets.only(left: 22.0),
+                  child: Lottie.asset(
+                    AppImageAsset.emptyaddress,
+                    height: 30.h,
+                  ),
                 ),
                 SizedBox(
                   height: 4.h,
@@ -84,9 +87,12 @@ class SavedAddress extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Lottie.asset(
-                    AppImageAsset.emptyaddress,
-                    height: 25.h,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 22.0),
+                    child: Lottie.asset(
+                      AppImageAsset.emptyaddress,
+                      height:30.h,
+                    ),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -116,7 +122,7 @@ class SavedAddress extends StatelessWidget {
                             controller.removeAddress(controller
                                 .address[index]['address_id']);
                           },
-                          backgroundColor: Color(0xffFF7A2F),
+                          backgroundColor: AppColor.secondaryColor,
                           foregroundColor: Colors.white,
                           icon: Icons.delete_outline_rounded,
                           borderRadius: BorderRadius.horizontal(
@@ -133,7 +139,7 @@ class SavedAddress extends StatelessWidget {
                             controller.removeAddress(controller
                                 .address[index]['address_id']);
                           },
-                          backgroundColor: Color(0xffFF7A2F),
+                          backgroundColor: AppColor.secondaryColor,
                           foregroundColor: Colors.white,
                           icon: Icons.delete_outline_rounded,
                           borderRadius: BorderRadius.horizontal(
@@ -148,7 +154,7 @@ class SavedAddress extends StatelessWidget {
                         color: myServices.sharedPreferences
                             .getInt("activeAddress") ==
                             index
-                            ? Color(0xffFF7A2F)
+                            ? AppColor.secondaryColor
                             : Colors.white60,
                         child: Directionality(
                           textDirection: TextDirection.ltr,
@@ -205,7 +211,7 @@ class SavedAddress extends StatelessWidget {
                                           ),
                                           const Icon(
                                             EneftyIcons.location_bold,
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                           ),
                                         ],
                                       ),
@@ -240,7 +246,7 @@ class SavedAddress extends StatelessWidget {
                                           const Icon(
                                             EneftyIcons
                                                 .info_circle_bold,
-                                            color: Color(0xffFF7A2F),
+                                            color: AppColor.secondaryColor,
                                           ),
                                         ],
                                       ),
@@ -268,7 +274,7 @@ class SavedAddress extends StatelessWidget {
           onPressed: () {
             Get.to(AddAddressScreen());
           },
-          backgroundColor: Color(0xffFF7A2F),
+          backgroundColor: AppColor.secondaryColor,
           child: const Icon(
             EneftyIcons.location_add_outline,
             color: Colors.white,
@@ -287,7 +293,7 @@ class YourShimmerWidget extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return Card(
-            color: Color(0xffFF7A2F),
+            color: AppColor.secondaryColor,
 
             child: Directionality(
               textDirection: TextDirection.ltr,
@@ -324,7 +330,7 @@ class YourShimmerWidget extends StatelessWidget {
                               ),
                               const Icon(
                                 EneftyIcons.location_bold,
-                                color: Color(0xffFF7A2F),
+                                color: AppColor.secondaryColor,
                               ),
                             ],
                           ),
@@ -348,7 +354,7 @@ class YourShimmerWidget extends StatelessWidget {
                               const Icon(
                                 EneftyIcons
                                     .info_circle_bold,
-                                color: Color(0xffFF7A2F),
+                                color: AppColor.secondaryColor,
                               ),
                             ],
                           ),

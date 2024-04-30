@@ -58,9 +58,12 @@ class CheckoutScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                Lottie.asset(
-                                  AppImageAsset.emptyaddress,
-                                  height: 20.h,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 22),
+                                  child: Lottie.asset(
+                                    AppImageAsset.emptyaddress,
+                                    height: 30.h,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 3.h,
@@ -85,7 +88,7 @@ class CheckoutScreen extends StatelessWidget {
                                       Get.to(AddAddressScreen());
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xffFF7A2F),
+                                      backgroundColor: AppColor.secondaryColor,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.sp),
@@ -122,7 +125,7 @@ class CheckoutScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(10.sp),
-                                      color: Color(0xffFF7A2F).withOpacity(0.4),
+                                      color: AppColor.secondaryColor.withOpacity(0.4),
                                     ),
                                     child: Text(
                                       'اضغط على العنوان الذي تريد توصيل الطلب إليه',
@@ -157,7 +160,7 @@ class CheckoutScreen extends StatelessWidget {
                                                         .getInt(
                                                             "activeAddress") ==
                                                     index
-                                                ? Color(0xffFF7A2F)
+                                                ? AppColor.secondaryColor
                                                 : Colors.white60,
                                             child: Directionality(
                                               textDirection: TextDirection.ltr,
@@ -216,8 +219,7 @@ class CheckoutScreen extends StatelessWidget {
                                                                         index
                                                                     ? Colors
                                                                         .white
-                                                                    : Color(
-                                                                        0xffFF7A2F),
+                                                                    : AppColor.secondaryColor,
                                                               ),
                                                             ],
                                                           ),
@@ -263,8 +265,7 @@ class CheckoutScreen extends StatelessWidget {
                                                                         index
                                                                     ? Colors
                                                                         .white
-                                                                    : Color(
-                                                                        0xffFF7A2F),
+                                                                    : AppColor.secondaryColor,
                                                               ),
                                                             ],
                                                           ),
@@ -362,7 +363,7 @@ class CheckoutScreen extends StatelessWidget {
                                           .getInt("addressid") ==
                                       null
                                   ? Colors.grey
-                                  : Color(0xffFF7A2F),
+                                  : AppColor.secondaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -410,7 +411,7 @@ class YourShimmerWidget extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return Card(
-            color: Color(0xffFF7A2F),
+            color: AppColor.secondaryColor,
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Container(

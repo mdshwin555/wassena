@@ -40,7 +40,7 @@ class TermsAndService extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'أهلا بك في تطبيق Order Now :',
+                  'أهلا بك في تطبيق Wasena :',
                   style:  TextStyle(
                     color: AppColor.black,
                     fontFamily: 'ElMessiri',
@@ -209,7 +209,7 @@ class TermsAndService extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h,),
                 Text(
-                  'رقم الهاتف : 0958768548',
+                  'رقم الهاتف : 0992373318',
                   style:  TextStyle(
                     color: AppColor.black,
                     fontFamily: 'ElMessiri',
@@ -218,7 +218,7 @@ class TermsAndService extends StatelessWidget {
                 ),
                 SizedBox(height: 1.h,),
                 Text(
-                  'البريد الإلكتروني : contact@ordernow.com',
+                  'البريد الإلكتروني : Wasena.hon@gmail.com',
                   style:  TextStyle(
                     color: AppColor.black,
                     fontFamily: 'ElMessiri',

@@ -3,10 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yumyum/view/screen/MainScreen.dart';
 import '../../../controller/Home/AddressController.dart';
 import '../../../core/constant/color.dart';
+import '../../../core/constant/imgaeasset.dart';
 import '../../../core/services/services.dart';
 
 class NextAddAddressScreen extends StatelessWidget {
@@ -225,7 +227,7 @@ class NextAddAddressScreen extends StatelessWidget {
                           width: 85.w,
                           margin: EdgeInsets.fromLTRB(8.w, 10.h, 8.w, 0),
                           decoration: BoxDecoration(
-                            color: Color(0xffFF7A2F),
+                            color: AppColor.secondaryColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -242,7 +244,33 @@ class NextAddAddressScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : CircularProgressIndicator(),
+              : Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 0.0),
+                  child: Lottie.asset(
+                    AppImageAsset.loadingmap,
+                    height: 40.h,
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                const Text(
+                  'جاري تحميل الخريطة',
+                  style: TextStyle(
+                    color: AppColor.grey,
+                    fontFamily: 'ElMessiri',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

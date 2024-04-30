@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yumyum/view/screen/Home/FavoriteScreen.dart';
 import '../../core/class/statusrequest.dart';
+import '../../core/constant/color.dart';
 import '../../core/constant/imgaeasset.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
@@ -162,7 +163,7 @@ class ItemsControllerImp extends ItemsController {
       BuildContext context = Get.context!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Color(0xffFF7A2F),
+          backgroundColor: AppColor.secondaryColor,
           content: Text(
             "تمت إضافة المنتجات للسلة !",
             textAlign: TextAlign.right,
@@ -228,7 +229,7 @@ class ItemsControllerImp extends ItemsController {
           BuildContext context = Get.context!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color(0xffFF7A2F),
+              backgroundColor: AppColor.secondaryColor,
               content: Text(
                 "تم تقديم تقييمك بنجاح للمنتج. نقدر مشاركتك وتعليقاتك!",
                 textAlign: TextAlign.right,

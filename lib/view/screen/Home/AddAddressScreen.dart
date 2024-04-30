@@ -35,7 +35,7 @@ class AddAddressScreen extends StatelessWidget {
                       LatLng latLng = cameraPosition.target;
                       if (controller.isMarkerWithinCircle(latLng)) {
                         controller.addMarkers(latLng);
-                        controller.setButtonColor(Color(0xffFF7A2F));
+                        controller.setButtonColor(AppColor.secondaryColor,);
                       } else {
                         controller.setButtonColor(Colors.grey);
                       }
@@ -51,8 +51,8 @@ class AddAddressScreen extends StatelessWidget {
                         center: LatLng(35.955069, 39.011858),
                         radius: 2500.sp,
                         strokeWidth: 1,
-                        fillColor: Color(0xffFF7A2F).withOpacity(0.1),
-                        strokeColor: Color(0xffFF7A2F),
+                        fillColor: AppColor.secondaryColor.withOpacity(0.1),
+                        strokeColor: AppColor.secondaryColor,
                       ),
                     },
                   ),
@@ -212,7 +212,7 @@ class AddAddressScreen extends StatelessWidget {
                     right: 5.w,
                     child: CircleAvatar(
                       radius: 17.sp,
-                      backgroundColor: Color(0xffFF7A2F),
+                      backgroundColor: AppColor.secondaryColor,
                       child: IconButton(
                         onPressed: () {
                           Get.back();
@@ -287,7 +287,7 @@ class AddAddressScreen extends StatelessWidget {
                               )
                             : Text(
                                 controller.buttonColor == Colors.grey
-                                    ? 'عذراَ! غير متاح التوصيل خارج الرقة'
+                                    ? 'عذراَ! غير متاح التوصيل في هذه المنطقة'
                                     : 'تأكيد',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -307,15 +307,18 @@ class AddAddressScreen extends StatelessWidget {
                     SizedBox(
                       height: 30.h,
                     ),
-                    Lottie.asset(
-                      AppImageAsset.emptyaddress,
-                      height: 30.h,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0.0),
+                      child: Lottie.asset(
+                        AppImageAsset.loadingmap,
+                        height: 40.h,
+                      ),
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     const Text(
-                      'جاري تحميل الخريطة',
+                      '..جاري تحميل الخريطة',
                       style: TextStyle(
                         color: AppColor.grey,
                         fontFamily: 'ElMessiri',

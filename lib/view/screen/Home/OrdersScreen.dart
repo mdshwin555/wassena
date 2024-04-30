@@ -53,7 +53,7 @@ class OrdersScreen extends StatelessWidget {
                                   padding: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                     color: controller.selectedIndex.value == 0
-                                        ? Color(0xffFF7A2F)
+                                        ? AppColor.secondaryColor
                                         : Colors.white,
                                     borderRadius: BorderRadius.circular(15.sp),
                                   ),
@@ -95,7 +95,7 @@ class OrdersScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                   color: controller.selectedIndex.value == 0
-                                      ? Color(0xffFF7A2F)
+                                      ? AppColor.secondaryColor
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(15.sp),
                                 ),
@@ -145,7 +145,7 @@ class OrdersScreen extends StatelessWidget {
                                   padding: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                     color: controller.selectedIndex.value == 1
-                                        ? Color(0xffFF7A2F)
+                                        ? AppColor.secondaryColor
                                         : Colors.white,
                                     borderRadius: BorderRadius.circular(15.sp),
                                   ),
@@ -186,7 +186,7 @@ class OrdersScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                   color: controller.selectedIndex.value == 1
-                                      ? Color(0xffFF7A2F)
+                                      ? AppColor.secondaryColor
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(15.sp),
                                 ),
@@ -237,7 +237,7 @@ class OrdersScreen extends StatelessWidget {
                                   padding: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                     color: controller.selectedIndex.value == 2
-                                        ? Color(0xffFF7A2F)
+                                        ? AppColor.secondaryColor
                                         : Colors.white,
                                     borderRadius: BorderRadius.circular(15.sp),
                                   ),
@@ -279,7 +279,7 @@ class OrdersScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                   color: controller.selectedIndex.value == 2
-                                      ? Color(0xffFF7A2F)
+                                      ? AppColor.secondaryColor
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(15.sp),
                                 ),
@@ -446,8 +446,7 @@ class OrdersScreen extends StatelessWidget {
                                                           ' ${Jiffy.parse('${controller.pinding[index]['orders_datetime']}').fromNow()}',
                                                           style: TextStyle(
                                                             fontSize: 10.sp,
-                                                            color: Color(
-                                                                0xffFF7A2F),
+                                                            color: AppColor.secondaryColor,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontFamily:
@@ -664,8 +663,7 @@ class OrdersScreen extends StatelessWidget {
                                                           ' ${Jiffy.parse('${controller.onway[index]['orders_datetime']}').fromNow()}',
                                                           style: TextStyle(
                                                             fontSize: 10.sp,
-                                                            color: Color(
-                                                                0xffFF7A2F),
+                                                            color: AppColor.secondaryColor,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontFamily:
@@ -864,8 +862,7 @@ class OrdersScreen extends StatelessWidget {
                                                           ' ${Jiffy.parse('${controller.archive[index]['orders_datetime']}').fromNow()}',
                                                           style: TextStyle(
                                                             fontSize: 10.sp,
-                                                            color: Color(
-                                                                0xffFF7A2F),
+                                                            color:AppColor.secondaryColor,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontFamily:
@@ -957,7 +954,7 @@ class YourShimmerWidget extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return Card(
-            color: Color(0xffFF7A2F),
+            color: AppColor.secondaryColor,
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Container(

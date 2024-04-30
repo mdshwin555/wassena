@@ -254,8 +254,7 @@ class ItemsScreen extends StatelessWidget {
                                                               TextDirection.rtl,
                                                           style: TextStyle(
                                                             fontSize: 10.sp,
-                                                            color: const Color(
-                                                                0xffFF7A2F),
+                                                            color: AppColor.secondaryColor,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontFamily:
@@ -277,8 +276,7 @@ class ItemsScreen extends StatelessWidget {
                                                                     TextStyle(
                                                                   fontSize:
                                                                       10.sp,
-                                                                  color: const Color(
-                                                                      0xffFF7A2F),
+                                                                  color: AppColor.secondaryColor,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
