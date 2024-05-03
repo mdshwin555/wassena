@@ -69,6 +69,23 @@ class MyApp extends StatelessWidget {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: InitialBindings(),
+        theme: ThemeData(
+          primaryColor: Color(0xff133032),
+          canvasColor: Color(0xff133032),
+          cardColor: Color(0xff133032),
+          focusColor: Color(0xff133032),
+          splashColor: Color(0xffbbd469),
+          bottomAppBarColor: Color(0xff133032),
+          backgroundColor: Color(0xff133032),
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.grey,
+          ),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Color(0xff133032),
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
+          useMaterial3: true,
+        ),
         home: SplashScreen(),
       );
     });

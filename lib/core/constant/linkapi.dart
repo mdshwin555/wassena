@@ -13,15 +13,18 @@ class AppLink {
   // ================================= Auth ========================== //
   static const String signUp = "$server/auth/signup.php";
   static const String signIn = "$server/auth/login.php";
+  static const String update_profile = "$server/auth/editprofile.php";
 
   // ================================= Home ========================== //
   static const String home = "$server/home.php";
   static const String contactus = "$server/contactus.php";
   static const String offers = "$server/offers.php";
+  static const String check_update = "$server/version.php";
   static const String items = "$server/items/items.php";
   static const String itemsnoauth = "$server/items/itemsnoauth.php";
   static const String itemsdetils = "$server/items/details.php";
   static const String search = "$server/items/search.php";
+  static const String searchAll = "$server/search.php";
   static const String addfav = "$server/favorite/add.php";
   static const String removefav = "$server/favorite/remove.php";
   static const String viewfav = "$server/favorite/view.php";
@@ -43,6 +46,7 @@ class AppLink {
   static const String itemsrating = "$server/rating/add.php";
 
   static const String viewrestaurants = "$server/restaurants/view.php";
+  static const String viewrestaurantsByID = "$server/restaurants/viewbyId.php";
   static const String itemsrestaurants = "$server/restaurants/itemsrestaurants.php";
   static const String itemsrestaurantsnoauth = "$server/restaurants/itemsrestaurantsnoauth.php";
   static const String categories = "$server/categories/view.php";

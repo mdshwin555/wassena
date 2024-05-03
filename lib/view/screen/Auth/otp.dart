@@ -155,8 +155,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 left: 6.w,
                 child: AuthButton(
                   buttonText: 'تحقق من الكود ',
+                  color: AppColor.secondaryColor,
                   onPressed: () async {
-                    controller.signUp(context);
+
+                    controller.signIn(context);
                   },
                 ),
               ),

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui';
-import 'dart:ui';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocode/geocode.dart';
@@ -36,15 +36,115 @@ class AddressController extends GetxController {
   Position? position;
   Color buttonColor = AppColor.secondaryColor;
 
-  bool isMarkerWithinCircle(LatLng markerPosition) {
-    LatLng circleCenter = LatLng(35.955069, 39.011858);
+
+///////Al Zabadani////////////
+  List<LatLng> getZabadaniPolygonPoints() {
+    return [
+      LatLng(33.757386, 36.161074),
+      LatLng(33.736760, 36.144079),
+      LatLng(33.722127, 36.139444),
+      LatLng(33.713417, 36.122707),
+      LatLng(33.698027, 36.110175),
+      LatLng(33.688431, 36.106909),
+      LatLng(33.662948, 36.090782),
+      LatLng(33.641291, 36.067796),
+      LatLng(33.634428, 36.027866),
+      LatLng(33.635390, 36.010905),
+
+      LatLng(33.642540, 36.005131),
+      LatLng(33.652763, 36.012648),
+
+      LatLng(33.660436, 36.024096),
+      LatLng(33.706110, 36.058771),
+      LatLng(33.718104, 36.075508),
+      LatLng(33.725814, 36.077482 ),
+      LatLng(33.730883, 36.083147),
+      LatLng(33.737093, 36.089499),
+      LatLng(33.739305, 36.102717),
+      LatLng(33.748583, 36.111042),
+      LatLng(33.772631, 36.124518),
+      LatLng(33.800237, 36.145031),
+      LatLng(33.810436, 36.147692),
+      LatLng(33.815856, 36.154215),
+      LatLng(33.820847, 36.157648),
+      LatLng(33.816426, 36.164515),
+      LatLng(33.811292, 36.165030),
+      LatLng(33.807940, 36.159451),
+      LatLng(33.800166, 36.154558),
+      LatLng(33.779480, 36.148207),
+      LatLng(33.765781, 36.138594),
+      LatLng(33.741090, 36.122372),
+      LatLng(33.735237, 36.116020),
+    ];
+  }
+  bool isMarkerInsidePolygon(LatLng markerPosition, List<LatLng> polygonPoints) {
+    bool isInside = false;
+    int count = 0;
+    for (int i = 0; i < polygonPoints.length; i++) {
+      LatLng vertex1 = polygonPoints[i];
+      LatLng vertex2 = polygonPoints[(i + 1) % polygonPoints.length];
+      if (_isIntersect(markerPosition, vertex1, vertex2)) {
+        count++;
+      }
+    }
+    if (count % 2 == 1) {
+      isInside = true;
+    }
+    return isInside;
+  }
+  bool _isIntersect(LatLng markerPosition, LatLng vertex1, LatLng vertex2) {
+    if (markerPosition.longitude < min(vertex1.longitude, vertex2.longitude) ||
+        markerPosition.longitude >= max(vertex1.longitude, vertex2.longitude) ||
+        markerPosition.latitude <= min(vertex1.latitude, vertex2.latitude) ||
+        vertex1.latitude == vertex2.latitude) {
+      return false;
+    }
+    double slope = (vertex2.longitude - vertex1.longitude) / (vertex2.latitude - vertex1.latitude);
+    double intersectionLongitude = vertex1.longitude + (markerPosition.latitude - vertex1.latitude) * slope;
+    return intersectionLongitude >= markerPosition.longitude;
+  }
+  bool isMarkerRawda(LatLng markerPosition) {
+
+    LatLng circleCenter = LatLng(33.652484, 36.021059);
+
     double distance = Geolocator.distanceBetween(
         markerPosition.latitude,
         markerPosition.longitude,
         circleCenter.latitude,
         circleCenter.longitude);
-    return distance <= 2600;
+
+    return distance <= 2400;
   }
+  ///////Damascus////////////
+  List<LatLng> getDamascusPolygonPoints() {
+    return [
+      LatLng(33.522333, 36.196382),
+      LatLng(33.502868, 36.219728),
+      LatLng(33.502868, 36.219728),
+      LatLng(33.482813, 36.240933),
+      LatLng(33.467222, 36.255428),
+      LatLng(33.468808, 36.270264),
+      LatLng(33.451084, 36.300257),
+      LatLng(33.464430, 36.322502),
+      LatLng(33.487154, 36.324001),
+      LatLng(33.473812, 36.360243),
+
+      LatLng(33.495075, 36.363742),
+      LatLng(33.546126, 36.348996),
+
+      LatLng(33.563622, 36.319253),
+      LatLng(33.547376, 36.299007),
+      LatLng(33.540501, 36.279012),
+      LatLng(33.544251, 36.260017),
+      LatLng(33.562165, 36.234523),
+      LatLng(33.560290, 36.232523),
+      LatLng(33.550084, 36.221776),
+      LatLng(33.542168, 36.226525),
+      LatLng(33.530085, 36.201780),
+      LatLng(33.522333, 36.196382),
+    ];
+  }
+////////////////************
 
   void setButtonColor(Color color) {
     if (color == AppColor.secondaryColor) {
@@ -184,11 +284,19 @@ class AddressController extends GetxController {
     LatLng latLng = LatLng(lat!, long!);
     addMarkers(latLng);
     moveCameraTo(latLng);
-    if (isMarkerWithinCircle(latLng)) {
-      setButtonColor(AppColor.secondaryColor);
-    } else {
-      setButtonColor(Colors.grey);
-    }
+     if(myServices.sharedPreferences.getString('users_city')=='الزبداني'){
+       if (isMarkerInsidePolygon(latLng, getZabadaniPolygonPoints()) || isMarkerRawda(latLng)==true) {
+         setButtonColor(AppColor.secondaryColor);
+       } else {
+         setButtonColor(Colors.grey);
+       }
+     }else{
+       if (isMarkerInsidePolygon(latLng, getDamascusPolygonPoints())) {
+         setButtonColor(AppColor.secondaryColor);
+       } else {
+         setButtonColor(Colors.grey);
+       }
+     }
     statusRequest = StatusRequest.none;
     update();
   }

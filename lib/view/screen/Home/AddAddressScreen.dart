@@ -33,27 +33,42 @@ class AddAddressScreen extends StatelessWidget {
                     //markers: controller.markers.toSet(),
                     onCameraMove: (CameraPosition cameraPosition) {
                       LatLng latLng = cameraPosition.target;
-                      if (controller.isMarkerWithinCircle(latLng)) {
-                        controller.addMarkers(latLng);
-                        controller.setButtonColor(AppColor.secondaryColor,);
-                      } else {
-                        controller.setButtonColor(Colors.grey);
-                      }
+                     if(myServices.sharedPreferences.getString('users_city')=='الزبداني'){
+                       if (controller.isMarkerInsidePolygon(latLng, controller.getZabadaniPolygonPoints()) || controller.isMarkerRawda(latLng)) {
+                         controller.addMarkers(latLng);
+                         controller.setButtonColor(AppColor.secondaryColor,);
+                       } else {
+                         controller.setButtonColor(Colors.grey);
+                       }
+                     }else{
+                       if (controller.isMarkerInsidePolygon(latLng, controller.getDamascusPolygonPoints())) {
+                         controller.addMarkers(latLng);
+                         controller.setButtonColor(AppColor.secondaryColor,);
+                       } else {
+                         controller.setButtonColor(Colors.grey);
+                       }
+                     }
                     },
                     mapType: MapType.terrain,
                     initialCameraPosition: controller.KGooglePlex!,
                     onMapCreated: (GoogleMapController controllermap) async {
                       controller.controllerCompleter!.complete(controllermap);
                     },
-                    circles: {
-                      Circle(
-                        circleId: CircleId("1"),
-                        center: LatLng(35.955069, 39.011858),
-                        radius: 2500.sp,
-                        strokeWidth: 1,
-                        fillColor: AppColor.secondaryColor.withOpacity(0.1),
-                        strokeColor: AppColor.secondaryColor,
-                      ),
+                    polygons: {
+                      myServices.sharedPreferences.getString('users_city')=='الزبداني'? Polygon(
+                        polygonId: PolygonId("madaya_polygon"),
+                        points:  controller.getZabadaniPolygonPoints(), // Function to get polygon points
+                        strokeWidth: 2,
+                        strokeColor: Colors.red, // Change stroke color as needed
+                        fillColor: Color(0xff133032).withOpacity(0.06),
+                      ):
+                      Polygon(
+                        polygonId: PolygonId("damascus_polygon"),
+                        points:  controller.getDamascusPolygonPoints(), // Function to get polygon points
+                        strokeWidth: 2,
+                        strokeColor: Colors.red, // Change stroke color as needed
+                        fillColor: Color(0xff133032).withOpacity(0.06),
+                      )
                     },
                   ),
                   Center(

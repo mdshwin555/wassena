@@ -12,6 +12,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import 'package:yumyum/view/screen/Home/OrdersScreen.dart';
+import 'package:yumyum/view/screen/MainScreen.dart';
 import '../../core/class/statusrequest.dart';
 import '../../core/constant/color.dart';
 import '../../core/functions/handingdatacontroller.dart';
@@ -285,7 +286,7 @@ class OrdersControllerImp extends OrdersController {
     // Clear previous polylines
     polylineSet.clear();
     var url =
-        "https://maps.googleapis.com/maps/api/directions/json?origin=$lat,$long&destination=$destlat,$destlong&key=AIzaSyBZoCY93kss7zkXAN9LW2N5__AhcI02GNw";
+        "https://maps.googleapis.com/maps/api/directions/json?origin=$lat,$long&destination=$destlat,$destlong&key=AIzaSyBJjDpq0S-cRzOkfeC2NtIvch3sVxXmWjs";
 
     var response = await http.post(Uri.parse(url));
 
@@ -404,14 +405,14 @@ class OrdersControllerImp extends OrdersController {
       if (mapData["status"] == true) {
         statusRequest = StatusRequest.success;
         update();
-        Get.back();
+        Get.offAll(MainScreen());
         getPinding();
         BuildContext context = Get.context!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppColor.secondaryColor,
             content: Text(
-              "تم إلغاء الطلب بنجاح نعتذر على التأخيرس!",
+              "تم إلغاء الطلب بنجاح نعتذر على التأخير!",
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 10.sp,

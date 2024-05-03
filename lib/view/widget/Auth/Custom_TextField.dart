@@ -12,6 +12,7 @@ class CustomTextField2 extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?) valid;
   final bool isPassword;
+  final bool isEnable;
 
   const CustomTextField2({
     Key? key,
@@ -21,6 +22,7 @@ class CustomTextField2 extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     required this.valid,
     this.isPassword = false,
+    this.isEnable = true,
   }) : super(key: key);
 
   @override
@@ -54,8 +56,10 @@ class CustomTextField2 extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'ElMessiri',
                     fontSize: 11.sp,
-                    color: Colors.black,
+                    color: isEnable ? Colors.black :Colors.grey,
                   ),
+                  enabled: isEnable,
+
                   validator: valid,
                   controller: controller,
                   keyboardType: keyboardType,
@@ -69,6 +73,10 @@ class CustomTextField2 extends StatelessWidget {
                     contentPadding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 3.5.w),
                     isDense: true,
                     enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(color: AppColor.grey),
+                    ),
+                    disabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       borderSide: BorderSide(color: AppColor.grey),
                     ),

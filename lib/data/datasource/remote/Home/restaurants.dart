@@ -15,6 +15,14 @@ class RestaurantsData {
     },{});
     return response.fold((l) => l, (r) => r);
   }
+  getdataID(
+      String restaurantsid,
+      ) async {
+    var response = await crud.postData(AppLink.viewrestaurantsByID, {
+      "restaurantsId": restaurantsid,
+    },{});
+    return response.fold((l) => l, (r) => r);
+  }
 
   getitems(
       String userid,

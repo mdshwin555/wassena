@@ -16,6 +16,7 @@ import '../../../core/constant/imgaeasset.dart';
 import '../../../core/services/services.dart';
 import 'AbousUs.dart';
 import 'ContactUs.dart';
+import 'Edit_profile.dart';
 import 'JoinUsScreen.dart';
 import 'SavedAddress.dart';
 import 'Terms&Servicescreen.dart';
@@ -123,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       myServices
                                                           .sharedPreferences
                                                           .clear();
-                                                      Get.to(SignInScreen());
+                                                      Get.offAll(SignInScreen());
                                                     },
                                                     style: ElevatedButton
                                                         .styleFrom(
@@ -195,6 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
                             },
                           ),
+
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -283,8 +285,323 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         border:
                             Border.all(width: 0.4.w, color: Colors.black26)),
                     child: SingleChildScrollView(
-                      child: Column(
+                      child: myServices.sharedPreferences
+                          .getString("users_phone") ==
+                          null
+                          ?
+                            Column(
                         children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(AboutUs());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      EneftyIcons.info_circle_bold,
+                                      color: AppColor.secondaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'حول التطبيق',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(TermsAndService());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      EneftyIcons.note_2_bold,
+                                      color: AppColor.secondaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'سياسية الخصوصية و الإستخدام',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // SizedBox(
+                                //   width: 8.w,
+                                // ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(ContactUs());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      EneftyIcons.call_calling_bold,
+                                      color: AppColor.secondaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'تواصل معنا',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(JoinUsScreen());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.5,
+                                      child: Image.asset(
+                                        AppImageAsset.joinus,
+                                        height: 3.h,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'انضم لنا',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Share.share(' وصينا الحل ,حمل التطبيق الآن 📲\nواستمتع بتجربة تسوق أسهل وأسرع وأكثر متعة واستفد من الخصومات والعروض الحصرية على التطبيق 🛒✨  \nhttps://play.google.com/store/apps/details?id=com.wasena.app ');
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      EneftyIcons.share_bold,
+                                      color: AppColor.secondaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'دعوة الأصدقاء ',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              openAppReview();
+                              _googlePlay();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    openAppReview();
+                                    _googlePlay();
+                                  },
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        EneftyIcons.star_bold,
+                                        color: AppColor.secondaryColor,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text(
+                                        'تقييم التطبيق  ',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'ElMessiri',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(Icons.navigate_next_sharp),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                        ],
+                      )
+                          :
+                            Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+
+                              Get.to(EditProfile());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      EneftyIcons.edit_2_bold,
+                                      color: AppColor.secondaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'تعديل معلوماتي الشخصية',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ElMessiri',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.navigate_next_sharp)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Divider(
+                            color: Colors.black26,
+                            thickness: 0.2.h,
+                            indent: 1.w,
+                            endIndent: 1.w,
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
                           GestureDetector(
                             onTap: () {
                               Get.to(SavedAddress());
@@ -591,7 +908,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 3.h,
                           ),
                         ],
-                      ),
+                      )
                     ),
                   ),
                 ],

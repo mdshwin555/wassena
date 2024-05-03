@@ -12,6 +12,8 @@ class SignUpData {
       String email,
       String password,
       String phone,
+      String gender,
+      String city,
       ) async {
     var response = await crud.postData(
         AppLink.signUp,
@@ -20,6 +22,8 @@ class SignUpData {
           "email": email,
           "password": password,
           "phone": phone,
+          "gender": gender,
+          "city": city,
         },
         {},
     );

@@ -65,10 +65,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBZoCY93kss7zkXAN9LW2N5__AhcI02GNw"/>
+            android:value="AIzaSyBJjDpq0S-cRzOkfeC2NtIvch3sVxXmWjs"/>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_stat_icon" />
+            android:resource="@drawable/ic_stat_logo" />
 
     </application>
 

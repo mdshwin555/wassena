@@ -307,7 +307,7 @@ class CartControllerImp extends CartController {
                           'الرجوع',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.green,
+                            color: Colors.black54,
                             fontFamily: 'ElMessiri',
                           ),
                         ),

@@ -11,6 +11,7 @@ import 'Home/HomeScreen.dart';
 import 'Home/ProfileScreen.dart';
 
 import 'Home/RestaurantsScreen.dart';
+import 'Home/Search.dart';
 
 class MainScreen extends StatelessWidget {
   List bottomnavigationbaritems = [
@@ -85,6 +86,12 @@ class MainScreen extends StatelessWidget {
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 elevation: 0,
                 centerTitle: true,
+                leading: controller.bottomNavIndex.value==2 ?Padding(
+                  padding:  EdgeInsets.only( left: 5.0.w),
+                  child: IconButton(onPressed: (){
+                    Get.to(SearchScreen());
+                  }, icon: Icon(EneftyIcons.search_normal_outline)),
+                ):SizedBox(),
                 title: Text(
                   titleAppBar[controller.bottomNavIndex.value],
                   style: TextStyle(

@@ -67,7 +67,6 @@ class RestaurantsControllerImp extends RestaurantsController {
     return result;
   }
 
-
   String formatTime(String timeStr) {
     TimeOfDay time = TimeOfDay(
       hour: int.parse(timeStr.split(':')[0]),
@@ -91,9 +90,6 @@ class RestaurantsControllerImp extends RestaurantsController {
 
     return '$formattedHour:$formattedMinute $period';
   }
-
-
-
 
   bool isRestaurantOpen(Map<String, dynamic> restaurant) {
     DateTime now = DateTime.now();
@@ -140,25 +136,6 @@ class RestaurantsControllerImp extends RestaurantsController {
     }
 
     return false;
-  }
-
-
-  int _compareTimeOfDay(TimeOfDay a, TimeOfDay b) {
-    if (a.hour < b.hour) {
-      return -1;
-    } else if (a.hour > b.hour) {
-      return 1;
-    } else {
-      // Hours are equal, compare minutes
-      if (a.minute < b.minute) {
-        return -1;
-      } else if (a.minute > b.minute) {
-        return 1;
-      } else {
-        // Both hours and minutes are equal
-        return 0;
-      }
-    }
   }
 
   @override
@@ -372,7 +349,7 @@ class RestaurantsControllerImp extends RestaurantsController {
 
   Future<double> calculateDistance(lat, long, destlat, destlong) async {
     var url =
-        "https://maps.googleapis.com/maps/api/directions/json?origin=$lat,$long&destination=$destlat,$destlong&key=AIzaSyBZoCY93kss7zkXAN9LW2N5__AhcI02GNw";
+        "https://maps.googleapis.com/maps/api/directions/json?origin=$lat,$long&destination=$destlat,$destlong&key=AIzaSyBJjDpq0S-cRzOkfeC2NtIvch3sVxXmWjs";
 
     var response = await http.post(Uri.parse(url));
 

@@ -7,11 +7,12 @@ import '../../../core/constant/color.dart';
 class AuthButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
-
+  final Color color;
   const AuthButton({
     super.key,
     required this.buttonText,
     required this.onPressed,
+    required this.color,
   });
 
   @override
@@ -23,7 +24,7 @@ class AuthButton extends StatelessWidget {
         ? Padding(
             padding: EdgeInsets.only(left: 39.w),
             child: CircleAvatar(
-              backgroundColor: AppColor.secondaryColor,
+              backgroundColor: color,
               radius: 20.sp,
               child: const CircularProgressIndicator(color: AppColor.white),
             ),
@@ -35,7 +36,7 @@ class AuthButton extends StatelessWidget {
               height: 7.5.h,
               width: 88.w,
               decoration: BoxDecoration(
-                color: AppColor.secondaryColor,
+                color: color,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(

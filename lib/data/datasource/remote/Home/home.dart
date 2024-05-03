@@ -12,6 +12,11 @@ class HomeData {
     return response.fold((l) => l, (r) => r);
   }
 
+  getversion() async {
+    var response = await crud.getData(AppLink.check_update, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
   getnotifications(
       String usersid,
       ) async {

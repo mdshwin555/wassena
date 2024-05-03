@@ -66,23 +66,7 @@ class SignInScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                top: 32.h,
-                left: 0.w,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: CustomTextField2(
-                    valid: (val) {
-                      return validInput(val!, 2, 25, "username");
-                    },
-                    controller: controller.name,
-                    keyboardType: TextInputType.name,
-                    labelText: 'الاسم ',
-                    hintText: 'أكتب اسمك',
-                    isPassword: false,
-                  ),
-                ),
-              ),
+
               Positioned(
                 top: 46.h,
                 left: 0.w,
@@ -137,25 +121,13 @@ class SignInScreen extends StatelessWidget {
                 left: 6.w,
                 child: AuthButton(
                   buttonText: 'تسجيل الدخول',
+                  color: AppColor.secondaryColor,
                   onPressed: () async {
-                    // await FirebaseAuth.instance.verifyPhoneNumber(
-                    //   phoneNumber: '+963958768548',
-                    //   verificationCompleted: (PhoneAuthCredential phoneAuthCredential)async{
-                    //     await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
-                    //   },
-                    //   verificationFailed: (error){
-                    //     throw Exception(error.message);
-                    //   },
-                    //   codeSent: (verificationId, forceResendingToken){
-                    //     Get.to(MainScreen());
-                    //   },
-                    //   codeAutoRetrievalTimeout: (verificationId){
-                    //
-                    //   },
-                    // );
-                    //loginUser('+963958768548',context);
+
                     if (controller.form.currentState!.validate()) {
-                      Get.to(OtpScreen(number: controller.phone.text,));
+
+                      controller.signIn(context);
+                      // Get.to(OtpScreen(number: controller.phone.text,));
                     }
                   },
                 ),

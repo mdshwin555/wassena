@@ -1,4 +1,5 @@
 import 'package:enefty_icons/enefty_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -12,6 +13,8 @@ import '../../../core/class/statusrequest.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/constant/linkapi.dart';
 import '../../../core/services/services.dart';
+import 'RestaurantsItemsByID.dart';
+import 'RestaurantsItemsScreen.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
@@ -113,20 +116,38 @@ class ProductDetails extends StatelessWidget {
                              offset: Offset(10.w,32.h),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100.sp),
-                                child: Container(
-                                  height: 6.h,
-                                  width: 6.h,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      100.sp,
-                                    ),
-                                  ),
-                                  child: ProgressiveImage(
+                                child: InkWell(
+                                  onTap: (){
+                                    myServices.sharedPreferences
+                                        .setString(
+                                        "restaurants_name",
+                                        controller.details[
+                                        0]
+                                        ['restaurants_name']);
+                                    myServices.sharedPreferences
+                                        .setInt(
+                                        "restaurants_id",
+                                        controller.details[
+                                        0]
+                                        ['restaurants_id']);
+
+                                    Get.to(RestaurantsItemsID());
+                                  },
+                                  child: Container(
                                     height: 6.h,
                                     width: 6.h,
-                                    image:
-                                        '${AppLink.restaurants_image}/${controller.details[0]['restaurants_logo']}',
-                                    imageError: AppImageAsset.shimmarimageeror,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        100.sp,
+                                      ),
+                                    ),
+                                    child: ProgressiveImage(
+                                      height: 6.h,
+                                      width: 6.h,
+                                      image:
+                                          '${AppLink.restaurants_image}/${controller.details[0]['restaurants_logo']}',
+                                      imageError: AppImageAsset.shimmarimageeror,
+                                    ),
                                   ),
                                 ),
                               ),

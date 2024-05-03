@@ -19,11 +19,7 @@ validInput(String val, int min, int max, String type) {
     }
   }
 
-  if (type == "phone") {
-    if (!val.startsWith('09') && val.length == 10) {
-      return 'أدخل رقم موبايل صالح';
-    }
-  }
+
 
   if (val.isEmpty) {
     return "يجب إدخال رقم الموبايل";

@@ -193,6 +193,7 @@ class JoinUsScreen extends StatelessWidget {
                     Center(
                       child: AuthButton(
                         buttonText: 'إرسال طلب ',
+                        color: AppColor.secondaryColor,
                         onPressed: () async {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -353,6 +354,7 @@ class JoinUsScreen extends StatelessWidget {
                     Center(
                       child: AuthButton(
                         buttonText: 'إرسال طلب ',
+                        color: AppColor.secondaryColor,
                         onPressed: () async {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -390,14 +392,4 @@ class JoinUsScreen extends StatelessWidget {
   }
 }
 
-class JoinAsStoreTab extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Join as a Store', // Add your content for joining as a store
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  }
-}
+

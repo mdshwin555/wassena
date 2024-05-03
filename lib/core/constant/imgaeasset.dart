@@ -4,6 +4,7 @@ class AppImageAsset {
   static const String rootLottie = "assets/lottie";
   // =============================== Images ========================== //
   static const String logo = "$rootImages/icon.png";
+  static const String logoIntro = "$rootImages/logoIntro.png";
   static const String splash = "$rootImages/splash.jpeg";
   static const String pizzaorder = "$rootImages/pizzaorder.jpg";
   static const String burgerorder = "$rootImages/burgerorder.jpg";
@@ -45,6 +46,7 @@ class AppImageAsset {
   static const String loading3 = "$rootLottie/loading3.json";
   static const String noorders = "$rootLottie/noorders2.json";
   static const String ordersuccssecful = "$rootLottie/ordersuccssecful.json";
+  static const String nostore = "$rootLottie/nostore.json";
   static const String emptyitems = "$rootLottie/emptyitems.json";
   static const String loadingmap = "$rootLottie/loadingmap.json";
   static const String emptyaddress = "$rootLottie/emptyaddress.json";
@@ -53,7 +55,7 @@ class AppImageAsset {
   static const String emptyorders = "$rootLottie/emptyorders.json";
   static const String emptyrestaurants = "$rootLottie/emptyrestaurants.json";
   static const String emptyfavorite = "$rootLottie/emptyfavorite.json";
-  static const String splashlogo = "$rootLottie/splashlogo.json";
+  static const String motor = "$rootLottie/motor.json";
   static const String dotsloading = "$rootLottie/dotsloading.json";
   static const String marker = "$rootLottie/marker.json";
   static const String deliverybike = "$rootLottie/deliverybike.json";

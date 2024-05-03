@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:enefty_icons/enefty_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:searchfield/searchfield.dart';
@@ -22,6 +23,9 @@ import 'package:badges/badges.dart' as badges;
 import 'AddAddressScreen.dart';
 import 'ProductDetails.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'RestaurantsItemsByID.dart';
+import 'RestaurantsItemsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -71,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                                                 : cartController.getItems();
                                             Get.to(BasketScreen());
                                           },
-                                          icon: Icon(EneftyIcons.bag_2_outline))
+                                          icon: Icon(EneftyIcons.shopping_cart_outline))
                                       : IconButton(
                                           onPressed: () {
                                             myServices.sharedPreferences
@@ -89,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                                     color: Colors.white),
                                               ),
                                               child: Icon(
-                                                EneftyIcons.bag_2_outline,
+                                                EneftyIcons.shopping_cart_outline,
                                                 size: 22.sp,
                                               )),
                                         ),
@@ -208,7 +212,7 @@ class HomeScreen extends StatelessWidget {
                                         BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: AppColor.red),
                                   ),
-                                  hintText: 'إبحث عن منتجات,متاجر,مطاعم ...',
+                                  hintText: 'إبحث عن منتجات...',
                                   hintStyle: TextStyle(
                                     height: 0.2.h,
                                     fontSize: 11.sp,
@@ -651,35 +655,49 @@ class HomeScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Transform.translate(
-                                              offset: Offset(2.w, 11.5.h),
-                                              child: Stack(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100.sp),
-                                                    child: Container(
-                                                      height: 5.5.h,
-                                                      width: 5.5.h,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          100.sp,
-                                                        ),
-                                                      ),
-                                                      child: ProgressiveImage(
-                                                        height: 5.5.h,
-                                                        width: 5.5.h,
-                                                        image:
-                                                            '${AppLink.restaurants_image}/${controller.items[index]['restaurants_logo']}',
-                                                        imageError: AppImageAsset
-                                                            .shimmarimageeror,
+                                            InkWell(
+                                              onTap:(){
+                                                myServices.sharedPreferences
+                                                    .setString(
+                                                    "restaurants_name",
+                                                    controller.items[
+                                                    index]
+                                                    ['restaurants_name']);
+                                                myServices.sharedPreferences
+                                                    .setInt(
+                                                    "restaurants_id",
+                                                    controller.items[
+                                                    index]
+                                                    ['items_restaurants']);
+
+                                                Get.to(RestaurantsItemsID());
+                                              },
+                                              child:Transform.translate(
+                                                offset: Offset(2.w, 11.5.h),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100.sp),
+                                                  child: Container(
+                                                    height: 5.5.h,
+                                                    width: 5.5.h,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                        100.sp,
                                                       ),
                                                     ),
+                                                    child: ProgressiveImage(
+                                                      height: 5.5.h,
+                                                      width: 5.5.h,
+                                                      image:
+                                                          '${AppLink.restaurants_image}/${controller.items[index]['restaurants_logo']}',
+                                                      imageError: AppImageAsset
+                                                          .shimmarimageeror,
+                                                    ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                             controller.items[index]
@@ -939,7 +957,7 @@ class YourShimmerWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           borderSide: BorderSide(color: AppColor.blue),
                         ),
-                        hintText: 'إبحث عن منتجات,متاجر,مطاعم ...',
+                        hintText: 'إبحث عن منتجات...',
                         hintStyle: TextStyle(
                           height: 0.2.h,
                           fontSize: 11.sp,
