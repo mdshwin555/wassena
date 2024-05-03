@@ -25,6 +25,7 @@ class RestaurantsItemsID extends StatelessWidget {
     RestaurantsByIDControllerImp restaurantsController =
         Get.put(RestaurantsByIDControllerImp());
     MyServices myServices = Get.find();
+    bool isAll= true;
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -358,281 +359,679 @@ class RestaurantsItemsID extends StatelessWidget {
                                       ],
                                     ),
                                   )
-                                : Container(
-                                    height: 75.h,
-                                    padding: EdgeInsets.only(top: 1.h),
-                                    margin: EdgeInsets.only(
-                                      left: 1.w,
-                                      right: 1.w,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            right: 4.w,
-                                            bottom: 1.h,
-                                          ),
-                                          child: Text(
-                                            'المنتجات :',
-                                            style: TextStyle(
-                                              color: AppColor.black,
-                                              fontFamily: 'ElMessiri',
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14.sp,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 68.h,
-                                          child: GridView.builder(
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 0.1,
-                                              mainAxisSpacing: 2,
-                                              childAspectRatio: 0.92,
-                                            ),
-                                            itemCount: controller.items.length,
-                                            itemBuilder: (context, index) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  myServices.sharedPreferences
-                                                      .setString("items_id",
-                                                          "${controller.items[index]['items_id']}");
-                                                  Get.to(ProductDetails());
-                                                },
-                                                child: Directionality(
-                                                  textDirection:
-                                                      TextDirection.ltr,
-                                                  child: Container(
-                                                    margin: EdgeInsets.all(1.w),
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.sp),
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Stack(
+                                : Column(
+                                  children: [
+
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isAll ? Colors.transparent : AppColor.secondaryColor, // Change color if not "All"
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  'عرض الكل',
+                                  style: TextStyle(
+                                      color: AppColor.black,
+                                      fontFamily: 'ElMessiri',
+                                      fontSize: 12.sp),
+                                ),
+                              ),
+                            ),
+                            Text('    '),
+                            InkWell(
+                              onTap: () {
+
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isAll ? AppColor.secondaryColor : Colors.transparent, // Change color if "All"
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  'الأقسام',
+                                  style: TextStyle(
+                                      color: AppColor.white,
+                                      fontFamily: 'ElMessiri',
+                                      fontSize: 12.sp),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        isAll==true?Container(
+                                                              height: 75.h,
+                                                              padding: EdgeInsets.only(top: 1.h),
+                                                              margin: EdgeInsets.only(
+                                                                left: 1.w,
+                                                                right: 1.w,
+                                                              ),
+                                                              child: DefaultTabController(
+                                                                length: 2,
+                                                                child:Column(
+                                                                  crossAxisAlignment:
+                                                                  CrossAxisAlignment.start,
+                                                                  children: [
+
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          if (controller.subCatList.isNotEmpty) // Check if subCatList is not empty
+                                            Container(
+                                              height: 5.h, // Adjust the height as needed
+                                              child: SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Row(
+                                                  children: List.generate(
+                                                    controller.subCatList.length,
+                                                        (index) => Padding(
+                                                      padding: EdgeInsets.symmetric(horizontal: 2.4.w),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          controller.selectTab(index);
+                                                        },
+                                                        focusColor: Colors.transparent,
+                                                        hoverColor: Colors.transparent,
+                                                        highlightColor: Colors.transparent,
+                                                        splashColor: Colors.transparent,
+                                                        child: Column(
+                                                          mainAxisSize: MainAxisSize.min,
                                                           children: [
-                                                            Hero(
-                                                              tag: controller
-                                                                          .items[
-                                                                      index]
-                                                                  ['items_id'],
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .vertical(
-                                                                            top:
-                                                                                Radius.circular(10.sp)),
-                                                                child:
-                                                                    Container(
-                                                                  height: 14.h,
-                                                                  width: double
-                                                                      .infinity,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.vertical(
-                                                                            top:
-                                                                                Radius.circular(10.sp)),
-                                                                  ),
-                                                                  child:
-                                                                      ProgressiveImage(
-                                                                    width:
-                                                                        300.0,
-                                                                    image:
-                                                                        '${AppLink.items_image}/${controller.items[index]['items_image']}',
-                                                                    height:
-                                                                        200.0,
-                                                                    imageError:
-                                                                        AppImageAsset
-                                                                            .shimmarimageeror,
-                                                                  ),
-                                                                ),
+                                                            Text(
+                                                              '${controller.subCatList[index]}',
+                                                              style: TextStyle(
+                                                                color: controller.selectedIndex.value == index
+                                                                    ? AppColor.secondaryColor
+                                                                    : Colors.black,
+                                                                fontFamily: 'ElMessiri',
+                                                                fontSize: 15.sp,
                                                               ),
                                                             ),
-                                                            controller.items[
-                                                                            index]
-                                                                        [
-                                                                        'items_discount'] ==
-                                                                    0
-                                                                ? SizedBox()
-                                                                : Transform
-                                                                    .translate(
-                                                                    offset: Offset(
-                                                                        -2.w,
-                                                                        -1.5.h),
-                                                                    child:
+                                                            SizedBox(height: 4), // Adjust the space between text and underline
+                                                            Container(
+                                                              height: 1.5, // Adjust the height of the line
+                                                              width: 80, // Adjust the width of the line
+                                                              decoration: BoxDecoration(
+                                                                color: controller.selectedIndex.value == index
+                                                                    ? AppColor.secondaryColor // Color of the underline when selected
+                                                                    : Colors.black, // Transparent when not selected
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          if (controller.subCatList.isEmpty)
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                'المنتجات:',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'ElMessiri',
+                                                  fontSize: 15.sp,
+                                                ),
+                                              ),
+                                            ),
+
+                                          SizedBox(height: 2.h,),
+                                          Container(
+                                            height: 65.h,
+                                            child: GridView.builder(
+
+                                                gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  crossAxisSpacing: 0.1,
+                                                  mainAxisSpacing: 2,
+                                                  childAspectRatio: 0.92,
+                                                ),
+
+                                                itemCount: controller.items.where((item) => item['items_subcat'] == controller.selectedIndex.value).length,
+                                                itemBuilder: (context, index) {
+                                                  Widget itemWidget = SizedBox(); // Placeholder widget
+
+                                                  int realIndex = 0;
+                                                  for (int i = 0; i < controller.items.length; i++) {
+                                                    final item = controller.items[i];
+                                                    if (item['items_subcat'] == controller.selectedIndex.value) {
+                                                      if (realIndex == index) {
+                                                        itemWidget = controller.items.where((item) => item['items_subcat'] == controller.selectedIndex.value).isNotEmpty? GestureDetector(
+                                                          onTap: () {
+                                                            myServices.sharedPreferences
+                                                                .setString("items_id", "${controller.items[i]['items_id']}");
+                                                            Get.to(ProductDetails());
+                                                          },
+                                                          child: Directionality(
+                                                            textDirection:
+                                                            TextDirection.ltr,
+                                                            child: Container(
+                                                              margin: EdgeInsets.all(1.w),
+                                                              decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors.grey),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    10.sp),
+                                                              ),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                                children: [
+                                                                  Stack(
+                                                                    children: [
+                                                                      Hero(
+                                                                        tag: controller
+                                                                            .items[
+                                                                        i]
+                                                                        ['items_id'],
+                                                                        child: ClipRRect(
+                                                                          borderRadius:
+                                                                          BorderRadius
+                                                                              .vertical(
+                                                                              top:
+                                                                              Radius.circular(10.sp)),
+                                                                          child:
+                                                                          Container(
+                                                                            height: 14.h,
+                                                                            width: double
+                                                                                .infinity,
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              borderRadius:
+                                                                              BorderRadius.vertical(
+                                                                                  top:
+                                                                                  Radius.circular(10.sp)),
+                                                                            ),
+                                                                            child:
+                                                                            ProgressiveImage(
+                                                                              width:
+                                                                              300.0,
+                                                                              image:
+                                                                              '${AppLink.items_image}/${controller.items[i]['items_image']}',
+                                                                              height:
+                                                                              200.0,
+                                                                              imageError:
+                                                                              AppImageAsset
+                                                                                  .shimmarimageeror,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      controller.items[
+                                                                      i]
+                                                                      [
+                                                                      'items_discount'] ==
+                                                                          0
+                                                                          ? SizedBox()
+                                                                          : Transform
+                                                                          .translate(
+                                                                        offset: Offset(
+                                                                            -2.w,
+                                                                            -1.5.h),
+                                                                        child:
                                                                         Stack(
-                                                                      alignment:
+                                                                          alignment:
                                                                           Alignment
                                                                               .center,
-                                                                      children: [
-                                                                        Image
-                                                                            .asset(
-                                                                          AppImageAsset
-                                                                              .offer,
-                                                                          height:
+                                                                          children: [
+                                                                            Image
+                                                                                .asset(
+                                                                              AppImageAsset
+                                                                                  .offer,
+                                                                              height:
                                                                               5.h,
-                                                                        ),
-                                                                        Text(
-                                                                          '%${controller.items[index]['items_discount']}',
-                                                                          style:
+                                                                            ),
+                                                                            Text(
+                                                                              '%${controller.items[i]['items_discount']}',
+                                                                              style:
                                                                               TextStyle(
-                                                                            fontSize:
+                                                                                fontSize:
                                                                                 11.sp,
-                                                                            color:
+                                                                                color:
                                                                                 Colors.white,
-                                                                            fontFamily:
+                                                                                fontFamily:
                                                                                 'ElMessiri',
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(height: 8.0),
+                                                                  Padding(
+                                                                    padding:
+                                                                    EdgeInsets.only(
+                                                                        right: 2.w,
+                                                                        left: 2.w),
+                                                                    child: FittedBox(
+                                                                      child: Row(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                        children: [
+                                                                          Text(
+                                                                            controller.items[
+                                                                            i]
+                                                                            [
+                                                                            'items_name_ar'],
+                                                                            style:
+                                                                            TextStyle(
+                                                                              fontSize:
+                                                                              11.sp,
+                                                                              color: Colors
+                                                                                  .black,
+                                                                              fontWeight:
+                                                                              FontWeight
+                                                                                  .bold,
+                                                                              fontFamily:
+                                                                              'ElMessiri',
+                                                                            ),
                                                                           ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                    EdgeInsets.only(
+                                                                        right: 2.w,
+                                                                        left: 2.w),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                      children: [
+                                                                        GestureDetector(
+                                                                          onTap: () {
+                                                                            controller
+                                                                                .addToCart(
+                                                                              i,
+                                                                              '${controller.items[i]['items_id']}',
+                                                                              '0',
+                                                                            );
+                                                                          },
+                                                                          child:
+                                                                          Image.asset(
+                                                                            AppImageAsset
+                                                                                .addtocart,
+                                                                            height: 3.5.h,
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                            width: 1.h),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                          children: [
+                                                                            Directionality(
+                                                                              textDirection:
+                                                                              TextDirection
+                                                                                  .rtl,
+                                                                              child: controller.items[i]['items_discount'] ==
+                                                                                  0
+                                                                                  ? Text(
+                                                                                '${controller.addCommasToNumber(controller.items[i]['items_price'])} ل.س ',
+                                                                                textDirection:
+                                                                                TextDirection.rtl,
+                                                                                style:
+                                                                                TextStyle(
+                                                                                  fontSize: 10.sp,
+                                                                                  color: AppColor.secondaryColor2,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontFamily: 'ElMessiri',
+                                                                                ),
+                                                                              )
+                                                                                  : FittedBox(
+                                                                                child:
+                                                                                Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      '${controller.addCommasToNumber((controller.items[i]['items_price'] - controller.items[i]['items_price'] * (controller.items[i]['items_discount'] / 100)).toInt())} ل.س ',
+                                                                                      textDirection: TextDirection.rtl,
+                                                                                      style: TextStyle(
+                                                                                        fontSize: 10.sp,
+                                                                                        color: AppColor.secondaryColor2,
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                        fontFamily: 'ElMessiri',
+                                                                                      ),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      '${controller.addCommasToNumber(controller.items[i]['items_price'])}',
+                                                                                      textDirection: TextDirection.rtl,
+                                                                                      style: TextStyle(
+                                                                                        decoration: TextDecoration.lineThrough,
+                                                                                        fontSize: 9.sp,
+                                                                                        color: Colors.grey,
+                                                                                        fontFamily: 'ElMessiri',
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ],
                                                                     ),
                                                                   ),
-                                                          ],
-                                                        ),
-                                                        SizedBox(height: 8.0),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  right: 2.w,
-                                                                  left: 2.w),
-                                                          child: FittedBox(
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ):
+                                                        SizedBox();
+                                                        break; // Exit the loop once the widget is found
+                                                      }
+                                                      realIndex++;
+                                                    }
+                                                  }
+
+                                                  return itemWidget;
+                                                }
+
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ):
+                                    Container(
+                                      height: 75.h,
+                                      padding: EdgeInsets.only(top: 1.h),
+                                      margin: EdgeInsets.only(
+                                        left: 1.w,
+                                        right: 1.w,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              right: 4.w,
+                                              bottom: 1.h,
+                                            ),
+                                            child: Text(
+                                              'المنتجات :',
+                                              style: TextStyle(
+                                                color: AppColor.black,
+                                                fontFamily: 'ElMessiri',
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 14.sp,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 68.h,
+                                            child: GridView.builder(
+
+                                              gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 0.1,
+                                                mainAxisSpacing: 2,
+                                                childAspectRatio: 0.92,
+                                              ),
+                                              itemCount: controller.items.length,
+                                              itemBuilder: (context, index) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    myServices.sharedPreferences
+                                                        .setString("items_id",
+                                                        "${controller.items[index]['items_id']}");
+                                                    Get.to(ProductDetails());
+                                                  },
+                                                  child: Directionality(
+                                                    textDirection:
+                                                    TextDirection.ltr,
+                                                    child: Container(
+                                                      margin: EdgeInsets.all(1.w),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey),
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.sp),
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .end,
+                                                        children: [
+                                                          Stack(
+                                                            children: [
+                                                              Hero(
+                                                                tag: controller
+                                                                    .items[
+                                                                index]
+                                                                ['items_id'],
+                                                                child: ClipRRect(
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .vertical(
+                                                                      top:
+                                                                      Radius.circular(10.sp)),
+                                                                  child:
+                                                                  Container(
+                                                                    height: 14.h,
+                                                                    width: double
+                                                                        .infinity,
+                                                                    decoration:
+                                                                    BoxDecoration(
+                                                                      borderRadius:
+                                                                      BorderRadius.vertical(
+                                                                          top:
+                                                                          Radius.circular(10.sp)),
+                                                                    ),
+                                                                    child:
+                                                                    ProgressiveImage(
+                                                                      width:
+                                                                      300.0,
+                                                                      image:
+                                                                      '${AppLink.items_image}/${controller.items[index]['items_image']}',
+                                                                      height:
+                                                                      200.0,
+                                                                      imageError:
+                                                                      AppImageAsset
+                                                                          .shimmarimageeror,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              controller.items[
+                                                              index]
+                                                              [
+                                                              'items_discount'] ==
+                                                                  0
+                                                                  ? SizedBox()
+                                                                  : Transform
+                                                                  .translate(
+                                                                offset: Offset(
+                                                                    -2.w,
+                                                                    -1.5.h),
+                                                                child:
+                                                                Stack(
+                                                                  alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                                  children: [
+                                                                    Image
+                                                                        .asset(
+                                                                      AppImageAsset
+                                                                          .offer,
+                                                                      height:
+                                                                      5.h,
+                                                                    ),
+                                                                    Text(
+                                                                      '%${controller.items[index]['items_discount']}',
+                                                                      style:
+                                                                      TextStyle(
+                                                                        fontSize:
+                                                                        11.sp,
+                                                                        color:
+                                                                        Colors.white,
+                                                                        fontFamily:
+                                                                        'ElMessiri',
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8.0),
+                                                          Padding(
+                                                            padding:
+                                                            EdgeInsets.only(
+                                                                right: 2.w,
+                                                                left: 2.w),
+                                                            child: FittedBox(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    controller.items[
+                                                                    index]
+                                                                    [
+                                                                    'items_name_ar'],
+                                                                    style:
+                                                                    TextStyle(
+                                                                      fontSize:
+                                                                      11.sp,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                      fontFamily:
+                                                                      'ElMessiri',
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                            EdgeInsets.only(
+                                                                right: 2.w,
+                                                                left: 2.w),
                                                             child: Row(
                                                               mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                              children: [
+                                                                GestureDetector(
+                                                                  onTap: () {
+                                                                    controller
+                                                                        .addToCart(
+                                                                      index,
+                                                                      '${controller.items[index]['items_id']}',
+                                                                      '0',
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                  Image.asset(
+                                                                    AppImageAsset
+                                                                        .addtocart,
+                                                                    height: 3.5.h,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: 1.h),
+                                                                Row(
+                                                                  mainAxisAlignment:
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  controller.items[
-                                                                          index]
-                                                                      [
-                                                                      'items_name_ar'],
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        11.sp,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontFamily:
-                                                                        'ElMessiri',
-                                                                  ),
+                                                                  children: [
+                                                                    Directionality(
+                                                                      textDirection:
+                                                                      TextDirection
+                                                                          .rtl,
+                                                                      child: controller.items[index]['items_discount'] ==
+                                                                          0
+                                                                          ? Text(
+                                                                        '${controller.items[index]['items_price']} ل.س ',
+                                                                        textDirection:
+                                                                        TextDirection.rtl,
+                                                                        style:
+                                                                        TextStyle(
+                                                                          fontSize: 10.sp,
+                                                                          color: AppColor.secondaryColor2,
+                                                                          fontWeight: FontWeight.bold,
+                                                                          fontFamily: 'ElMessiri',
+                                                                        ),
+                                                                      )
+                                                                          : FittedBox(
+                                                                        child:
+                                                                        Column(
+                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              '${(controller.items[index]['items_price'] - controller.items[index]['items_price'] * (controller.items[index]['items_discount'] / 100)).toInt()} ل.س ',
+                                                                              textDirection: TextDirection.rtl,
+                                                                              style: TextStyle(
+                                                                                fontSize: 10.sp,
+                                                                                color: AppColor.secondaryColor2,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontFamily: 'ElMessiri',
+                                                                              ),
+                                                                            ),
+                                                                            Text(
+                                                                              '${controller.items[index]['items_price']}',
+                                                                              textDirection: TextDirection.rtl,
+                                                                              style: TextStyle(
+                                                                                decoration: TextDecoration.lineThrough,
+                                                                                fontSize: 9.sp,
+                                                                                color: Colors.grey,
+                                                                                fontFamily: 'ElMessiri',
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  right: 2.w,
-                                                                  left: 2.w),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  controller
-                                                                      .addToCart(
-                                                                    index,
-                                                                    '${controller.items[index]['items_id']}',
-                                                                    '0',
-                                                                  );
-                                                                },
-                                                                child:
-                                                                    Image.asset(
-                                                                  AppImageAsset
-                                                                      .addtocart,
-                                                                  height: 3.5.h,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 1.h),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Directionality(
-                                                                    textDirection:
-                                                                        TextDirection
-                                                                            .rtl,
-                                                                    child: controller.items[index]['items_discount'] ==
-                                                                            0
-                                                                        ? Text(
-                                                                            '${controller.items[index]['items_price']} ل.س ',
-                                                                            textDirection:
-                                                                                TextDirection.rtl,
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontSize: 10.sp,
-                                                                              color: AppColor.secondaryColor2,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontFamily: 'ElMessiri',
-                                                                            ),
-                                                                          )
-                                                                        : FittedBox(
-                                                                            child:
-                                                                                Column(
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Text(
-                                                                                  '${(controller.items[index]['items_price'] - controller.items[index]['items_price'] * (controller.items[index]['items_discount'] / 100)).toInt()} ل.س ',
-                                                                                  textDirection: TextDirection.rtl,
-                                                                                  style: TextStyle(
-                                                                                    fontSize: 10.sp,
-                                                                                    color: AppColor.secondaryColor2,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                    fontFamily: 'ElMessiri',
-                                                                                  ),
-                                                                                ),
-                                                                                Text(
-                                                                                  '${controller.items[index]['items_price']}',
-                                                                                  textDirection: TextDirection.rtl,
-                                                                                  style: TextStyle(
-                                                                                    decoration: TextDecoration.lineThrough,
-                                                                                    fontSize: 9.sp,
-                                                                                    color: Colors.grey,
-                                                                                    fontFamily: 'ElMessiri',
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                       ],
                     ),
                   ),

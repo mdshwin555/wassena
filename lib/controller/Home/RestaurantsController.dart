@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
@@ -49,7 +48,8 @@ class RestaurantsControllerImp extends RestaurantsController {
   List restaurants = [];
   List categories = [];
   List items = [];
-
+  List subCatList = [];
+  String? sub_cat;
 
   String addCommasToNumber(int number) {
     String numberStr = number.toString();
@@ -173,7 +173,6 @@ class RestaurantsControllerImp extends RestaurantsController {
     statusRequest = StatusRequest.loading;
     update();
     var response = await restaurantsData.getitems(usersId, restaurantsid);
-    //print("=============================== response $response ");
 
     if (StatusRequest.success == handlingData(response)) {
       Map mapData = {};
@@ -185,6 +184,9 @@ class RestaurantsControllerImp extends RestaurantsController {
         // Clear the existing items and favoriteIndices list
         items = [];
         items = mapData['data'];
+        sub_cat = mapData['data'][0]['restaurants_subcat'];
+         subCatList = sub_cat!.split(',').map((String item) => item.trim()).toList();
+        update();
 
         return true;
       } else {

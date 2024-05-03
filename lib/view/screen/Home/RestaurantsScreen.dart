@@ -129,7 +129,7 @@ class RestaurantScreen extends StatelessWidget {
                                                   .getInt("selectedcategory") ==
                                               index
                                           ? AppColor.secondaryColor2
-                                          : Colors.white,
+                                          : Colors.black26,
                                       thickness: 0.3.h,
                                     ),
                                   ],

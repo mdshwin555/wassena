@@ -368,7 +368,7 @@ class ProductDetails extends StatelessWidget {
                               },
                               child: CircleAvatar(
                                 radius: 15.sp,
-                                backgroundColor: AppColor.primaryColor,
+                                backgroundColor: AppColor.secondaryColor,
                                 child: Icon(
                                   Icons.add,
                                   size: 12.sp,
@@ -396,7 +396,7 @@ class ProductDetails extends StatelessWidget {
                               },
                               child: CircleAvatar(
                                 radius: 15.sp,
-                                backgroundColor: AppColor.primaryColor,
+                                backgroundColor: AppColor.secondaryColor,
                                 child: Icon(
                                   Icons.remove,
                                   size: 12.sp,

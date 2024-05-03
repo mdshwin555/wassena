@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yumyum/core/constant/imgaeasset.dart';
 import '../../../controller/Home/SplashController.dart';
 import '../../../core/constant/color.dart';
@@ -16,10 +17,31 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   MyServices myServices = Get.find();
+  late AnimationController _controller;
+
+  _google_play() async {
+    final uri = Uri.parse('https://play.google.com/store/apps/details?id=com.wasena.app');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
 
 
+  @override
+  void initState() {
+    super.initState();
+    SplashControllerImp().getVersion();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2), // Adjust the duration as needed
+    );
+
+    _controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,32 +59,54 @@ class _SplashScreenState extends State<SplashScreen> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
             ),
-            Container(
-                alignment: Alignment.center,
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    AppColor.secondaryColor,
-                    BlendMode.srcIn,
+            Positioned(
+              bottom: 26.h,
+              right: -6.0.w,
+              child:ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  AppColor.secondaryColor,
+                  BlendMode.srcIn,
+                ),
+                child: Transform.scale(
+                  scale:  0.74,
+                  child: Image.asset(
+                    AppImageAsset.logoIntro,
+                    height: 50.h,
                   ),
-                  child: Transform.scale(
-                    scale:  0.7,
-                    child: Image.asset(
-                      AppImageAsset.logoIntro,
-                      height: 50.h,
-                    ),
-                  ),
-                )
+                ),
+              ),
             ),
 
 
            controller.current_version!=controller.version? Positioned(
               bottom: 22.h,
-              child: Text(
-                'Please update for new version',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    'Critical App Update Available: \nEnsure Seamless Experience by Updating Now',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
+
+                      fontSize: 10.sp,
+                    ),
+                  ),
+                  SizedBox(height: 1.4.h,),
+                  InkWell(
+                    onTap: (){_google_play();},
+                    child: Text(
+                      'click here for update!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.grey,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ):Text(''),
             Positioned(
@@ -76,8 +120,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Positioned(
-              bottom: 46.h,
-              left: 35.5.w,
+              bottom: 48.h,
+              left: 36.5.w,
               child: Container(
                   alignment: Alignment.center,
                   child: ColorFiltered(
@@ -91,7 +135,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: Transform.rotate(
                         angle: -0.3,
                         child: Transform.scale(
-                          scale:  0.57,
+                          scale:  0.75,
                           child: Lottie.asset(
                             AppImageAsset.motor,
                             height: 15.h,
@@ -102,23 +146,25 @@ class _SplashScreenState extends State<SplashScreen> {
                   )
               ),
             ),
-            Positioned(
-              bottom: 38.h,
-              left: 24.w,
-              child:DefaultTextStyle(
-                style: const TextStyle(
-                    fontSize: 70.0,
-                    fontFamily: 'ElMessiri',
-                    color: AppColor.secondaryColor
-                ),
-                child: AnimatedTextKit(
-                  isRepeatingAnimation: false,
-
-                  animatedTexts: [
-                    ScaleAnimatedText('صينا'),
-                  ],
-                ),
-              ),
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (BuildContext context, Widget? child) {
+                return Positioned(
+                  bottom: 42.h,
+                  left: 38.w,
+                  child: Transform.scale(
+                    scale:  4* _controller.value,
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: 'ElMessiri',
+                        color: AppColor.secondaryColor,
+                      ),
+                      child: Text('صينا'),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -127,9 +173,5 @@ class _SplashScreenState extends State<SplashScreen> {
 
   }
 
-  @override
-  void initState() {
-    super.initState();
-    SplashControllerImp().getVersion();
-  }
+
 }

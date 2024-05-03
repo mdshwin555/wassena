@@ -49,7 +49,8 @@ class RestaurantsByIDControllerImp extends RestaurantsByIDController {
   List restaurants = [];
   List categories = [];
   List items = [];
-
+  List subCatList = [];
+  String? sub_cat;
 
   String addCommasToNumber(int number) {
     String numberStr = number.toString();
@@ -185,7 +186,9 @@ class RestaurantsByIDControllerImp extends RestaurantsByIDController {
         // Clear the existing items and favoriteIndices list
         items = [];
         items = mapData['data'];
-
+        sub_cat = mapData['data'][0]['restaurants_subcat'];
+        subCatList = sub_cat!.split(',').map((String item) => item.trim()).toList();
+        update();
         return true;
       } else {
         statusRequest = StatusRequest.success;

@@ -117,7 +117,10 @@ class SearchScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 4.h,),
+              Container(
+                height: 4.h,
+                color: Colors.white,
+              ),
               Container(
                 decoration: BoxDecoration(color: Colors.white),
                 child: TabBar(
@@ -146,7 +149,6 @@ class SearchScreen extends StatelessWidget {
               ),
               SizedBox(height: 1.h,),
               Expanded(
-
                 child: TabBarView(
                  physics:NeverScrollableScrollPhysics() ,
                   children: [
@@ -508,43 +510,43 @@ class SearchScreen extends StatelessWidget {
                             textDirection: TextDirection.ltr,
                             child: GestureDetector(
                               onTap: () {
-                                // myServices.sharedPreferences
-                                //     .setString(
-                                //     "restaurants_name",
-                                //     controller.restaurants[
-                                //     index]
-                                //     ['restaurants_name']);
-                                // myServices.sharedPreferences
-                                //     .setInt(
-                                //     "restaurants_id",
-                                //     controller.restaurants[
-                                //     index]
-                                //     ['restaurants_id']);
-                                // myServices.sharedPreferences
-                                //     .setInt("restaurants_index",
-                                //     index);
-                                // myServices.sharedPreferences
-                                //     .getString(
-                                //     "users_phone") ==
-                                //     null
-                                //     ? controller
-                                //     .viewitemsrestaurantsnoauth()
-                                //     : controller
-                                //     .viewitemsrestaurants();
-                                //
-                                // controller.calculateDistance(
-                                //     controller.lat == null
-                                //         ? 33.555555
-                                //         : controller.lat!,
-                                //     controller.long == null
-                                //         ? 33.55555
-                                //         : controller.long!,
-                                //     controller.restaurants[index]
-                                //     ['restaurants_lat'],
-                                //     controller.restaurants[index]
-                                //     ['restaurants_long']);
-                                //
-                                // Get.to(RestaurantsItemsScreen());
+                                myServices.sharedPreferences
+                                    .setString(
+                                    "restaurants_name",
+                                    controller.items[
+                                    index]
+                                    ['restaurants_name']);
+                                myServices.sharedPreferences
+                                    .setInt(
+                                    "restaurants_id",
+                                    controller.items[
+                                    index]
+                                    ['restaurants_id']);
+                                myServices.sharedPreferences
+                                    .setInt("restaurants_index",
+                                    index);
+                                myServices.sharedPreferences
+                                    .getString(
+                                    "users_phone") ==
+                                    null
+                                    ? controller
+                                    .viewitemsrestaurantsnoauth()
+                                    : controller
+                                    .viewitemsrestaurants();
+
+                                controller.calculateDistance(
+                                    controller.lat == null
+                                        ? 33.555555
+                                        : controller.lat!,
+                                    controller.long == null
+                                        ? 33.55555
+                                        : controller.long!,
+                                    controller.items[index]
+                                    ['restaurants_lat'],
+                                    controller.items[index]
+                                    ['restaurants_long']);
+
+                                Get.to(RestaurantsItemsScreen());
                               },
                               child: Container(
                                 margin: EdgeInsets.all(1.w),
