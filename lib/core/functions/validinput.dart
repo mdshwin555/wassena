@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 validInput(String val, int min, int max, String type) {
   if (type == "username") {
     if (!RegExp(r'^[A-Za-z\u0600-\u06FF\s]+$').hasMatch(val)) {
-      return 'يجب إدخال الاسم';
+      return 'وين إسم الكابتن يازلمة';
     }
   }
   // Add other validation logic for different types if needed
@@ -19,14 +19,23 @@ validInput(String val, int min, int max, String type) {
     }
   }
 
-
+  if (type == "phone") {
+    if (!val.startsWith('09') && val.length == 10) {
+      return 'معقول هاد رقم كابتن ؟ حط 09';
+    }
+  }
+  if (type == "password") {
+    if (val.isEmpty) {
+      return 'أدخل كلمة مرور قوية لهالكابتن المحترم';
+    }
+  }
 
   if (val.isEmpty) {
-    return "يجب إدخال رقم الموبايل";
+    return "وين رقم الهاتف؟";
   }
 
   if (val.length < min) {
-    return "لا يمكن أن يكون أقل من $min";
+    return "رقم الجوال لا يمكن أن يكون أقل من $min";
   }
 
   if (val.length > max) {

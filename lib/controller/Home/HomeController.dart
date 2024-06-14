@@ -1,423 +1,264 @@
-import 'dart:convert';
+import 'dart:async';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:geocode/geocode.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jiffy/jiffy.dart';
-import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:yumyum/controller/Home/TrackingController.dart';
 import '../../core/class/statusrequest.dart';
-import '../../core/constant/color.dart';
-import '../../core/constant/linkapi.dart';
 import '../../core/functions/handingdatacontroller.dart';
 import '../../core/services/services.dart';
-import '../../data/datasource/remote/Home/Offers.dart';
-import '../../data/datasource/remote/Home/address.dart';
-import '../../data/datasource/remote/Home/cart.dart';
-import '../../data/datasource/remote/Home/home.dart';
-import 'package:http/http.dart' as http;
+import '../../data/datasource/remote/Auth/CaptainData.dart';
+import '../../data/datasource/remote/Home/orders.dart';
+import 'package:jiffy/jiffy.dart';
 
+import 'CaptainControllerImp.dart';
 
 abstract class HomeController extends GetxController {
-  getData();
+
 }
 
 class HomeControllerImp extends HomeController {
-  HomeData homeData = HomeData(Get.find());
-  OffersData offersData = OffersData(Get.find());
-  AddressData addressData = AddressData(Get.find());
-  CartData cartData = CartData(Get.find());
   MyServices myServices = Get.find();
   StatusRequest statusRequest = StatusRequest.none;
-  RxInt bottomNavIndex = 4.obs;
-  GlobalKey<FormState> form = GlobalKey<FormState>();
-  TextEditingController search = TextEditingController();
-  bool _locationSettingsOpened = false;
-  RxInt notificationlength = 0.obs;
-  var home = true.obs;
-  Position? position;
-  CameraPosition? KGooglePlex;
-  List<Marker> markers = [];
-  double? lat;
-  double? long;
-  String currentLocationName = 'غير معروف';
-  int? version;
-  int current_version=1;
-
-  List categories = [];
-  List items = [];
-  List itemstopselling = [];
-  List address = [];
-  List notifications = [];
-  List notificationslength = [];
-  List offers = [];
-  List searchlist = [];
-  List cartitems = [];
-  RxInt currentIndex = 0.obs;
+  CaptainUpData captainUpData = CaptainUpData(Get.find());
+  List captains = [];
 
 
-  updatecurrentIndex(int index) {
-    currentIndex.value = index;
-    update();
-  }
 
-
-  void updateisHome(bool value) {
-    home.value = value;
-    getData();
-    update();
-  }
-
-  Future<void> RequestPermissionLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled && !_locationSettingsOpened) {
-      // Location services are not enabled, show dialog to enable location services
-      return _showLocationServiceDialog(
-          "تنبيه", "يرجى تشغيل خدمات الموقع لإضافة عنوانك الحالي");
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Location permission denied, show dialog to enable location services
-        return _showLocationServiceDialog(
-            "تنبيه", "يرجى تشغيل خدمات الموقع لإضافة عنوانك الحالي");
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, show dialog accordingly
-      return _showLocationServiceDialog("تنبيه",
-          "لا يمكن استعمال التطبيق بدون اعطاء صلاحيات الوصول للموقع أثناء استعمال التطبيق");
-    }
-  }
-
-  Future<void> _showLocationServiceDialog(String title, String message) async {
-    _locationSettingsOpened = true;
-    return showDialog<void>(
-      context: Get.context!,
-      barrierDismissible: false,
-      // Dialog is not dismissible with a tap on the outside
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(message),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            Row(
-              children: [
-                TextButton(
-                  child: Text('تشغيل'),
-                  onPressed: () {
-                    // Open location settings
-                    openLocationSettings();
-                  },
-                ),
-                TextButton(
-                  child: Text('إلغاء'),
-                  onPressed: () {
-                    // Open location settings
-                    Get.back();
-                  },
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> openLocationSettings() async {
-    await Geolocator.openLocationSettings();
-    _locationSettingsOpened = false;
-  }
-
-  addToCart(int index, String items_id, String count) async {
-    if (myServices.sharedPreferences.getString("token") == null) {
-      BuildContext context = Get.context!;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                " ! يجب تسجيل الدخول أولا ",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 10.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'ElMessiri',
-                ),
-              ),
-              SizedBox(
-                width: 2.w,
-              ),
-              Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
-            ],
-          ),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    } else {
-      var usersId = '${myServices.sharedPreferences.getInt("users_id")!}';
-
-      var response = await cartData.adddata(usersId, items_id);
-
-      if (StatusRequest.success == handlingData(response)) {
-        Map mapData = {};
-        mapData.addAll(response);
-
-        if (mapData["status"] == true) {
-          statusRequest = StatusRequest.success;
-          update();
-
-          BuildContext context = Get.context!;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: AppColor.secondaryColor,
-              content: Text(
-                "تمت إضافة المنتجات للسلة !",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 10.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'ElMessiri',
-                ),
-              ),
-              duration: Duration(seconds: 2),
-            ),
-          );
-        } else {
-          statusRequest = StatusRequest.success;
-          update();
-        }
-      } else if (statusRequest == StatusRequest.offlinefailure) {
-        Get.snackbar("فشل", "you are not online please check on it");
-      } else if (statusRequest == StatusRequest.serverfailure) {
-        // Handle server failure
-      }
-    }
-  }
-
-  getCurrentLocation() async {
-    position = await Geolocator.getCurrentPosition();
-    KGooglePlex = CameraPosition(
-      target: LatLng(position!.latitude, position!.longitude),
-      zoom: 14.4746,
-    );
-
-    var address = await GeoCode().reverseGeocoding(
-      latitude: position!.latitude,
-      longitude: position!.longitude,
-    );
-    lat = position?.latitude;
-    long = position?.longitude;
-    myServices.sharedPreferences.setDouble("lat", lat!);
-    myServices.sharedPreferences.setDouble("long", long!);
-    currentLocationName = address.streetAddress!;
-    statusRequest = StatusRequest.success;
-    update();
-  }
-
-
-  getNotification() async {
+  @override
+  viewcaptains() async {
     statusRequest = StatusRequest.loading;
     update();
-    var response = await homeData.getnotifications(
-      '${myServices.sharedPreferences.getInt("users_id")!}',
-    );
+    var response = await captainUpData.viewcaptains();
+    // print("=============================== response $response ");
     if (StatusRequest.success == handlingData(response)) {
       Map mapData = {};
       mapData.addAll(response);
       if (mapData["status"] == true) {
-        notifications = mapData['data'];
-        notifications = List.from(notifications.reversed);
+        statusRequest = StatusRequest.success;
+        update();
+        captains = [];
+        captains = mapData['data'];
         return true;
       } else {
         statusRequest = StatusRequest.success;
         update();
-        notifications = [];
+        captains = [];
       }
     } else if (statusRequest == StatusRequest.offlinefailure) {
+      statusRequest = StatusRequest.success;
+      update();
       return Get.snackbar("فشل", "you are not online please check on it");
     } else if (statusRequest == StatusRequest.serverfailure) {
-      // Handle server failure
+      statusRequest = StatusRequest.success;
+      update();
+      return Get.snackbar("فشل", "you are not online please check on it");
     }
   }
+  // @override
+  // getPending() async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await ordersData.getpending();
+  //   // print("=============================== response $response ");
+  //   if (StatusRequest.success == handlingData(response)) {
+  //     Map mapData = {};
+  //     mapData.addAll(response);
+  //     if (mapData["status"] == true) {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //
+  //       // Clear the existing items and cartIndices list
+  //
+  //       pending = mapData['data'];
+  //       pending = List.from(pending.reversed);
+  //       return true;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //       pending = [];
+  //     }
+  //   } else if (statusRequest == StatusRequest.offlinefailure) {
+  //     return Get.snackbar("فشل", "you are not online please check on it");
+  //   } else if (statusRequest == StatusRequest.serverfailure) {
+  //     // Handle server failure
+  //   }
+  // }
+  //
+  // @override
+  // getAccepted() async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await ordersData.getaccepted(
+  //     '${myServices.sharedPreferences.getInt("delivery_id")!}',
+  //   );
+  //   // print("=============================== response $response ");
+  //   if (StatusRequest.success == handlingData(response)) {
+  //     Map mapData = {};
+  //     mapData.addAll(response);
+  //     if (mapData["status"] == true) {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //
+  //       // Clear the existing items and cartIndices list
+  //
+  //       accepted = mapData['data'];
+  //       accepted = List.from(accepted.reversed);
+  //       return true;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //       accepted = [];
+  //     }
+  //   } else if (statusRequest == StatusRequest.offlinefailure) {
+  //     return Get.snackbar("فشل", "you are not online please check on it");
+  //   } else if (statusRequest == StatusRequest.serverfailure) {
+  //     // Handle server failure
+  //   }
+  // }
+  //
+  // @override
+  // getArchive() async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await ordersData.getarchive(
+  //     '${myServices.sharedPreferences.getInt("delivery_id")!}',
+  //   );
+  //   // print("=============================== response $response ");
+  //   if (StatusRequest.success == handlingData(response)) {
+  //     Map mapData = {};
+  //     mapData.addAll(response);
+  //     if (mapData["status"] == true) {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //
+  //       // Clear the existing items and cartIndices list
+  //
+  //       archive = mapData['data'];
+  //       archive = List.from(archive.reversed);
+  //       return true;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //       archive = [];
+  //     }
+  //   } else if (statusRequest == StatusRequest.offlinefailure) {
+  //     return Get.snackbar("فشل", "you are not online please check on it");
+  //   } else if (statusRequest == StatusRequest.serverfailure) {
+  //     // Handle server failure
+  //   }
+  // }
+  //
+  // @override
+  // approve(String ordersid, String usersid) async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await ordersData.approve(
+  //     ordersid,
+  //     usersid,
+  //     '${myServices.sharedPreferences.getInt("delivery_id")!}',
+  //   );
+  //   // print("=============================== response $response ");
+  //   if (StatusRequest.success == handlingData(response)) {
+  //     Map mapData = {};
+  //     mapData.addAll(response);
+  //     if (mapData["status"] == true) {
+  //       getPending();
+  //       getCurrentLocation();
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //
+  //       return true;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //     }
+  //   } else if (statusRequest == StatusRequest.offlinefailure) {
+  //     return Get.snackbar("فشل", "you are not online please check on it");
+  //   } else if (statusRequest == StatusRequest.serverfailure) {
+  //     // Handle server failure
+  //   }
+  // }
+  //
+  // @override
+  // done(String ordersid, String usersid) async {
+  //   statusRequest = StatusRequest.loading;
+  //   update();
+  //   var response = await ordersData.done(
+  //     ordersid,
+  //     usersid,
+  //   );
+  //   getCurrentLocation();
+  //   Get.put(TrackingController());
+  //   // print("=============================== response $response ");
+  //   if (StatusRequest.success == handlingData(response)) {
+  //     Map mapData = {};
+  //     mapData.addAll(response);
+  //     if (mapData["status"] == true) {
+  //       getAccepted();
+  //       totalOrders += 1;
+  //
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //
+  //       return true;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //       update();
+  //     }
+  //   } else if (statusRequest == StatusRequest.offlinefailure) {
+  //     return Get.snackbar("فشل", "you are not online please check on it");
+  //   } else if (statusRequest == StatusRequest.serverfailure) {
+  //     // Handle server failure
+  //   }
+  // }
 
-  getsearch(String query) async {
-    var response = await homeData.search(
-      query,
-    );
+  List online_captains = [];
+
+  @override
+  viewonlinecaptains() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    var response = await captainUpData.viewonlinecaptains();
+    // print("=============================== response $response ");
     if (StatusRequest.success == handlingData(response)) {
       Map mapData = {};
       mapData.addAll(response);
       if (mapData["status"] == true) {
         statusRequest = StatusRequest.success;
-        searchlist = mapData['data'];
         update();
+        online_captains = [];
+        online_captains = mapData['data'];
         return true;
       } else {
         statusRequest = StatusRequest.success;
         update();
-        searchlist = [];
+        online_captains = [];
       }
     } else if (statusRequest == StatusRequest.offlinefailure) {
+      statusRequest = StatusRequest.success;
+      update();
       return Get.snackbar("فشل", "you are not online please check on it");
     } else if (statusRequest == StatusRequest.serverfailure) {
-      // Handle server failure
+      statusRequest = StatusRequest.success;
+      update();
     }
   }
 
-  @override
-  getData() async {
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await homeData.getdata();
-    if (StatusRequest.success == handlingData(response)) {
-      Map mapData = {};
-      mapData.addAll(response);
-      if (mapData["status"] == true) {
-        statusRequest = StatusRequest.success;
-        update();
-        categories = mapData['categories']['data'];
-        items = mapData['items']['data'];
-        getCurrentLocation();
-        return true;
-      } else {
-        statusRequest = StatusRequest.success;
-        update();
-        items =[];
-      }
-    } else if (statusRequest == StatusRequest.offlinefailure) {
-      return Get.snackbar("فشل", "you are not online please check on it");
-    } else if (statusRequest == StatusRequest.serverfailure) {}
-  }
-
-  getOffers() async {
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await offersData.getoffers();
-    if (StatusRequest.success == handlingData(response)) {
-      Map mapData = {};
-      mapData.addAll(response);
-      if (mapData["status"] == true) {
-        offers = [];
-        offers = mapData['data'];
-        getData();
-        return true;
-      } else {
-        offers = [];
-      }
-    } else if (statusRequest == StatusRequest.offlinefailure) {
-      return Get.snackbar("فشل", "you are not online please check on it");
-    } else if (statusRequest == StatusRequest.serverfailure) {}
-  }
-
-  ///check version
-  _google_play() async {
-    final uri = Uri.parse('https://play.google.com/store/apps/details?id=com.wasena.app');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $uri';
-    }
-  }
-  @override
-  getVersion() async {
-    statusRequest = StatusRequest.loading;
-    update();
-    var response = await homeData.getversion();
-    if (StatusRequest.success == handlingData(response)) {
-      Map mapData = {};
-      mapData.addAll(response);
-      if (mapData["status"] == true) {
-        version = mapData['data'][0]['version_number'];
-
-        if(current_version!=version){
-          showDialog(
-            context: Get.context!,
-            barrierDismissible: false,
-            builder: (BuildContext context) => CupertinoAlertDialog(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.update_sharp,size: 14,),
-
-                  const Text('Check update  '),
-                ],
-              ),
-              content: Text(' أحدث الميزات والتحسينات عن طريق تحديث تطبيق وصينا إلى الإصدار الأحدث '),
-              actions: <CupertinoDialogAction>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  onPressed: () => _google_play(),
-                  child: const Text('تحديث الآن', style: TextStyle(color: Colors.blueGrey)),
-                ),
-              ],
-            ),
-          );
-        }
-        statusRequest = StatusRequest.success;
-        update();
-        return true;
-      } else {
-
-        statusRequest = StatusRequest.success;
-        update();
-      }
-    } else if (statusRequest == StatusRequest.offlinefailure) {
-
-      return Get.snackbar("فشل", "you are not online please check on it");
-    } else if (statusRequest == StatusRequest.serverfailure) {}
-  }
+  void onInit() async{
 
 
-
-
-  @override
-  void onInit() async {
-    getData();
-    getOffers();
-    getVersion();
-    getCurrentLocation();
-    getNotification();
-    RequestPermissionLocation();
-    await Jiffy.setLocale('ar');
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed){
-      if(!isAllowed){
-        AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
-
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
+    print("Firebase Messaging Token: $token");
+    myServices.sharedPreferences.setString("token",'admin');
+    viewcaptains();
+    viewonlinecaptains();
     super.onInit();
   }
 
   @override
   void dispose() {
-    getOffers();
-    getData();
-    getCurrentLocation();
-    getNotification();
-    getCurrentLocation();
-    RequestPermissionLocation();
 
     super.dispose();
   }

@@ -1,4 +1,4 @@
-package com.example.wasena
+package com.wasenaadmin2.com
 
 import io.flutter.embedding.android.FlutterActivity
 

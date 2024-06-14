@@ -5,22 +5,23 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yumyum/view/screen/Home/AddAddressScreen.dart';
 import 'package:yumyum/view/screen/Home/OrdersScreen.dart';
-import 'package:yumyum/view/screen/MainScreen.dart';
+import 'dart:ui' as ui;
 import '../../../controller/Home/OrdersController.dart';
+import '../../../core/class/handlingdataview.dart';
 import '../../../core/class/statusrequest.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/constant/linkapi.dart';
 import '../../../core/services/services.dart';
-import 'TrackingScreen.dart';
+import 'ShowAddressUser.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
-    OrdersControllerImp ordersController = Get.put(OrdersControllerImp());
-    ordersController.getDetails();
+    Get.put(OrdersControllerImp());
     MyServices myServices = Get.find();
 
     return Directionality(
@@ -31,7 +32,7 @@ class OrdersDetails extends StatelessWidget {
           leading: IconButton(
               icon: Icon(Icons.arrow_back_ios_new),
               onPressed: () {
-                Get.back();
+                Get.off(OrdersScreen());
               }),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
@@ -40,247 +41,634 @@ class OrdersDetails extends StatelessWidget {
             'طلب رقم : ${myServices.sharedPreferences.getString("orders_id")!}',
             style: TextStyle(
               color: AppColor.black,
-              fontFamily: 'ElMessiri',
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.w600,
               fontSize: 14.sp,
             ),
           ),
         ),
         body: GetBuilder<OrdersControllerImp>(
-          builder: (controller) => SingleChildScrollView(
-            child: controller.statusRequest == StatusRequest.loading
-                ? Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child:
-                        YourShimmerWidget(), // Replace with your shimmer widget
-                  )
-                : SizedBox(
-                    height: 100.h,
-                    width: 100.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 54.h,
-                          width: 100.w,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 2.w, vertical: 1.h),
-                          child: Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: ListView.builder(
-                              itemCount: controller.details.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  child: Container(
-                                    height: 15.h,
-                                    width: 90.w,
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(width:4.w),
-                                        Text(
-                                          "X${controller.details[index]['countitems']}",
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            color: Colors.redAccent,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'ElMessiri',
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '${controller.details[index]['items_name_ar']}',
-                                                style: TextStyle(
-                                                  fontSize: 13.sp,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily: 'ElMessiri',
-                                                ),
-                                              ),
-                                              Text(
-                                                "${controller.details[index]['restaurants_name']}",
-                                                style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  color: Colors.black26,
-                                                  fontFamily: 'ElMessiri',
-                                                ),
-                                              ),
-                                              Text(
-                                                " ل.س ${controller.details[index]['itemsprice']}",
-                                                textDirection: TextDirection.rtl,
-                                                style: TextStyle(
-                                                  fontSize: 11.sp,
-                                                  color: Colors.red,
-                                                  fontFamily: 'ElMessiri',
-                                                  fontWeight: FontWeight.bold
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 1.h,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          margin:
-                                              EdgeInsets.fromLTRB(0, 0, 3.w, 0),
-                                          height: 12.h,
-                                          width: 31.w,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.sp),
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    '${AppLink.items_image}/${controller.details[index]['items_image']}'),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+          builder: (controller) => HandlingDataRequest(
+            statusRequest: controller.statusRequest,
+            widget: Container(
+              height: 100.h,
+              width: 100.w,
+              child: SingleChildScrollView(
+                child: controller.statusRequest == StatusRequest.loading ||
+                        controller.details.isEmpty
+                    ? RefreshIndicator(
+                  onRefresh: ()async{
+                    await Future.delayed(Duration(seconds: 2));
+                    controller.onInit();
+                  },
+                  color: Colors.white,
+                  backgroundColor: AppColor.secondaryColor,
+                  child: Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child:
+                              YourShimmerWidget(), // Replace with your shimmer widget
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(2.w, 1.h, 5.w, 0),
-                          child: Text(
-                            'عنوان التوصيل :',
-                            style: TextStyle(
-                              color: AppColor.black,
-                              fontFamily: 'ElMessiri',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13.sp,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 0),
-                          height: 18.h,
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.sp),
-                            border: Border.all(
-                              color: Colors.black54,
-                              width: 0.2.w,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  margin: EdgeInsets.fromLTRB(0, 0, 3.w, 0),
-                                  height: 14.h,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.sp),
-                                  ),
-                                  child: controller.statusRequest ==
-                                              StatusRequest.loading ||
-                                          controller.details.isEmpty
-                                      ? Center(
-                                          child:
-                                              const CircularProgressIndicator(
-                                                  color: AppColor.white),
-                                        )
-                                      : GoogleMap(
-                                          zoomControlsEnabled: false,
-                                          initialCameraPosition: CameraPosition(
-                                            target: LatLng(
-                                              controller.details[0]
-                                                  ['address_lat'],
-                                              controller.details[0]
-                                                  ['address_long'],
+                    )
+                    : RefreshIndicator(
+                  onRefresh: ()async{
+                    await Future.delayed(Duration(seconds: 2));
+                    controller.onInit();
+                  },
+                  color: Colors.white,
+                  backgroundColor: AppColor.secondaryColor,
+                  child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 56.h,
+                              width: 100.w,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 2.w, vertical: 1.h),
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: controller.details.length+1,
+                                  itemBuilder: (context, index) {
+                                    if(index == controller.details.length){
+                                      return  Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(2.w, 1.h, 5.w, 0),
+                                            child: Text(
+                                              ':ملاحظات على الأوردر ',
+                                              style: TextStyle(
+                                                color: AppColor.black,
+                                                fontFamily: 'Cairo',
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 13.sp,
+                                              ),
                                             ),
-                                            zoom: 15.4746,
                                           ),
-                                          onMapCreated: (GoogleMapController
-                                              controllermap) {
-                                            if (controller
-                                                    .controllerCompleter !=
-                                                null) {
-                                              controller.controllerCompleter!
-                                                  .complete(controllermap);
-                                            }
-                                          },
-                                          mapType: MapType.normal,
-                                          markers: Set<Marker>.of(
-                                            controller.details.map((detail) {
-                                              return Marker(
-                                                markerId: MarkerId(
-                                                    detail['items_name']
-                                                        .toString()),
-                                                position: LatLng(
-                                                  detail['address_lat'],
-                                                  detail['address_long'],
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 0),
+                                            height: 14.h,
+                                            width: 100.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8.sp),
+                                              border: Border.all(
+                                                color: Colors.black54,
+                                                width: 0.2.w,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(0, 2.h, 5.w, 0),
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    controller.details[0]['orders_description']=='' ? 'لا يوجد ملاحظات': '${controller.details[0]['orders_description']}',
+                                                    style: TextStyle(
+                                                      color: controller.details[0]['orders_description']!='' ?
+                                                      AppColor.black : Colors.grey,
+                                                      fontFamily: 'Cairo',
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  ),
+                                                  const Icon(
+                                                    EneftyIcons.book_bold,
+                                                    color: AppColor.secondaryColor,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,),
+                                          Container(
+                                            width: 100.w,
+                                            alignment: Alignment.topRight,
+                                            margin: EdgeInsets.fromLTRB(3.w, 0, 3.w, 1.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w, vertical: 2.h),
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(10.0),
+                                            ),
+                                            child: Directionality(
+                                              textDirection: TextDirection.rtl,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'تفاصيل الطلب :',
+                                                    style: TextStyle(
+                                                      fontSize: 13.sp,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontFamily: 'Cairo',
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: ListView.builder(
+                                                      physics: NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      itemCount: controller.details.length,
+                                                      itemBuilder: (context, index) {
+                                                        return Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              controller.details[index]
+                                                              ['items_name_ar'],
+                                                              style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                fontFamily: 'Cairo',
+                                                              ),
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  ' SYP',
+                                                                  textDirection: TextDirection.ltr,
+                                                                  style: TextStyle(
+                                                                    fontSize: 13.sp,
+                                                                    fontFamily: 'Cairo',
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  '${controller.addCommasToNumber((controller.details[index]['itemsprice'] - controller.details[index]['itemsprice'] * controller.details[index]['items_discount'] / 100).toInt())}',
+                                                                  textDirection: TextDirection.ltr,
+                                                                  style: TextStyle(
+                                                                    fontSize: 13.sp,
+                                                                    fontFamily: 'Cairo',
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 3.h,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'التوصيل',
+                                                        style: TextStyle(
+                                                          fontSize: 13.sp,
+                                                          color: AppColor.secondaryColor2,
+                                                          fontFamily: 'Cairo',
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          InkWell(
+                                                              onTap: (){
+                                                                showDialog(
+                                                                  context: context,
+                                                                  builder: (BuildContext context) {
+                                                                    return Container(
+                                                                      width: 95.w,
+                                                                      child: AlertDialog(
+                                                                        backgroundColor: Colors.white,
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                            BorderRadius.circular(10.sp)),
+                                                                        content: Column(
+                                                                          mainAxisSize: MainAxisSize.min,
+                                                                          children: [
+                                                                            SizedBox(height: 10.0),
+                                                                            Text(
+                                                                              ' تعديل سعر التوصيل للطلب (${myServices.sharedPreferences.getString("orders_id")!})',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: TextStyle(
+                                                                                fontSize: 11.sp,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontFamily: 'Cairo',
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 2.h,
+                                                                            ),
+                                                                            TextFormField(
+                                                                              controller: controller.new_delivery_price,
+                                                                              keyboardType: TextInputType.number,
+                                                                              decoration: InputDecoration(
+                                                                                isDense: true,
+                                                                                contentPadding:
+                                                                                EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 3.w),
+                                                                                border: const OutlineInputBorder(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                                                  borderSide: BorderSide(color: AppColor.grey),
+                                                                                ),
+                                                                                enabledBorder: const OutlineInputBorder(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                                                  borderSide: BorderSide(color: AppColor.grey),
+                                                                                ),
+                                                                                focusedBorder: const OutlineInputBorder(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                                                  borderSide: BorderSide(color: AppColor.primaryColor),
+                                                                                ),
+                                                                                errorBorder: const OutlineInputBorder(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                                                  borderSide: BorderSide(color: AppColor.red),
+                                                                                ),
+                                                                                suffix: Text('SYP'),
+                                                                                hintText: controller.new_delivery_price.text,
+                                                                                hintStyle: TextStyle(
+                                                                                  height: 0.2.h,
+                                                                                  fontSize: 11.sp,
+                                                                                  fontFamily: 'Cairo',
+                                                                                  letterSpacing: 1,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 2.h,
+                                                                            ),
+                                                                            Row(
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Container(
+                                                                                    height: 6.h,
+                                                                                    width: 20.w,
+                                                                                    child: ElevatedButton(
+                                                                                      onPressed: () {
+
+                                                                                        controller.updateDeliveryPriceOrder(
+                                                                                          myServices.sharedPreferences.getString("orders_id")!,
+                                                                                            controller.new_delivery_price.text
+                                                                                        );
+                                                                                        Get.back();
+                                                                                      },
+                                                                                      style: ElevatedButton
+                                                                                          .styleFrom(
+                                                                                        backgroundColor:
+                                                                                        AppColor.secondaryColor,
+                                                                                        shape:
+                                                                                        RoundedRectangleBorder(
+                                                                                          borderRadius:
+                                                                                          BorderRadius
+                                                                                              .circular(10.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      child: Text(
+                                                                                        'تعديل',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 10.sp,
+                                                                                          color: Colors.white,
+                                                                                          fontWeight:
+                                                                                          FontWeight.bold,
+                                                                                          fontFamily: 'Cairo',
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 5.w,
+                                                                                ),
+                                                                                Expanded(
+                                                                                  child: GestureDetector(
+                                                                                    onTap: () {
+                                                                                      Get.back();
+                                                                                    },
+                                                                                    child: Container(
+                                                                                      alignment: Alignment.center,
+                                                                                      height: 6.h,
+                                                                                      width: 20.w,
+                                                                                      decoration: BoxDecoration(
+                                                                                          borderRadius:
+                                                                                          BorderRadius
+                                                                                              .circular(10),
+                                                                                          border: Border.all(
+                                                                                            color:
+                                                                                            AppColor.grey,
+                                                                                            width: 0.3.h,
+                                                                                          )),
+                                                                                      child: Text(
+                                                                                        'لا',
+                                                                                        style: TextStyle(
+                                                                                          color:
+                                                                                          AppColor.grey,
+                                                                                          height: 0.2.h,
+                                                                                          fontSize: 15.sp,
+                                                                                          fontWeight:
+                                                                                          FontWeight.bold,
+                                                                                          fontFamily: 'Cairo',
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                              child: Icon(EneftyIcons.edit_2_bold,color: AppColor.black,)),
+                                                          Text(
+                                                            ' SYP',
+                                                            textDirection: TextDirection.ltr,
+                                                            style: TextStyle(
+                                                              fontSize: 13.sp,
+                                                              color: AppColor.secondaryColor2,
+                                                              fontFamily: 'Cairo',
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '${controller.addCommasToNumber(controller.details[0]['orders_pricedelivery'].toInt())} ',
+                                                            textDirection: TextDirection.ltr,
+                                                            style: TextStyle(
+                                                              fontSize: 13.sp,
+                                                              color: AppColor.secondaryColor2,
+                                                              fontFamily: 'Cairo',
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'السعر الإجمالي',
+                                                        style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            color: Colors.red,
+                                                            fontFamily: 'Cairo',
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            ' SYP',
+                                                            textDirection: TextDirection.ltr,
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                color: Colors.red,
+                                                                fontFamily: 'Cairo',
+                                                                fontWeight: FontWeight.bold),
+                                                          ),
+
+                                                          Text(
+                                                            ' ${controller.addCommasToNumber(controller.details[0]['orders_totalprice'].toInt())}',
+                                                            textDirection: TextDirection.ltr,
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                color: Colors.red,
+                                                                fontFamily: 'Cairo',
+                                                                fontWeight: FontWeight.bold),
+                                                          ),
+
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                    else{
+                                      return Card(
+                                        child: Container(
+                                          height: 15.h,
+                                          width: 90.w,
+                                          decoration: BoxDecoration(),
+                                          child: FittedBox(
+                                            child: Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                SizedBox(width:4.w),
+                                                Text(
+                                                  "X${controller.details[index]['countitems']}",
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    color: Colors.redAccent,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: 'Cairo',
+                                                  ),
                                                 ),
-                                                infoWindow: InfoWindow(
-                                                  title:
-                                                      detail['items_name_ar'],
-                                                  snippet:
-                                                      detail['items_desc_ar'],
+                                                SizedBox(width:19.w),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                      '${controller.details[index]['items_name_ar']}',
+                                                      style: TextStyle(
+                                                        fontSize: 13.sp,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: 'Cairo',
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "${controller.details[index]['restaurants_name']}",
+                                                      style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        color: Colors.black26,
+                                                        fontFamily: 'Cairo',
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      " ل.س ${controller.addCommasToNumber(controller.details[index]['itemsprice'])}",
+                                                      textDirection: TextDirection.rtl,
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
+                                                          color: Colors.red,
+                                                          fontFamily: 'Cairo',
+                                                          fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 1.h,
+                                                    ),
+                                                  ],
                                                 ),
-                                              );
-                                            }),
+                                                SizedBox(
+                                                  width: 5.w,
+                                                ),
+                                                Container(
+                                                  margin:
+                                                  EdgeInsets.fromLTRB(0, 0, 3.w, 0),
+                                                  height: 12.h,
+                                                  width: 31.w,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                      BorderRadius.circular(10.sp),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            '${AppLink.items_image}/${controller.details[index]['items_image']}'),
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
+                                      );
+                                    }
+                                  },
                                 ),
                               ),
-                              SizedBox(
-                                width: 3.w,
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(2.w, 1.h, 5.w, 0),
+                              child: Text(
+                                'عنوان التوصيل :',
+                                style: TextStyle(
+                                  color: AppColor.black,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.sp,
+                                ),
                               ),
-                              controller.statusRequest ==
-                                          StatusRequest.loading ||
-                                      controller.details.isEmpty
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                          color: AppColor.white),
-                                    )
-                                  : Expanded(
-                                      flex: 5,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                            ),
+                            InkWell(
+                              onTap: (){
+                                Get.to(ShowAddressUser());
+                              },
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 0),
+                                height: 18.h,
+                                width: 100.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.sp),
+                                  border: Border.all(
+                                    color: Colors.black54,
+                                    width: 0.2.w,
+                                  ),
+                                ),
+                                child: FittedBox(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(0, 0, 3.w, 0),
+                                        height: 19.h,
+                                        width: 45.w,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.sp),
+                                        ),
+                                        child: controller.statusRequest ==
+                                                StatusRequest.loading
+                                            ? Center(
+                                                child:
+                                                    const CircularProgressIndicator(
+                                                        color: AppColor.white),
+                                              )
+                                            : GoogleMap(
+                                                zoomControlsEnabled: false,
+                                                initialCameraPosition:
+                                                    CameraPosition(
+                                                  target: LatLng(
+                                                    controller.details[0]
+                                                        ['address_lat'],
+                                                    controller.details[0]
+                                                        ['address_long'],
+                                                  ),
+                                                  zoom: 15.4746,
+                                                ),
+                                                onMapCreated: (GoogleMapController
+                                                    controllermap) {
+                                                  if (controller
+                                                          .controllerCompleter !=
+                                                      null) {
+                                                    controller.controllerCompleter!
+                                                        .complete(controllermap);
+                                                  }
+                                                },
+                                                mapType: MapType.normal,
+                                                markers: Set<Marker>.of(
+                                                  controller.details.map((detail) {
+                                                    return Marker(
+                                                      markerId: MarkerId(
+                                                          detail['items_name']
+                                                              .toString()),
+                                                      position: LatLng(
+                                                        detail['address_lat'],
+                                                        detail['address_long'],
+                                                      ),
+                                                      infoWindow: InfoWindow(
+                                                        title:
+                                                            detail['items_name_ar'],
+                                                        snippet:
+                                                            detail['items_desc_ar'],
+                                                      ),
+                                                    );
+                                                  }),
+                                                ),
+                                              ),
+                                      ),
+                                      SizedBox(
+                                        width: 3.w,
+                                      ),
+                                      Column(
+                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            height: 3.h,
+                                            height: 2.h,
+                                          ),
+                                          Row(
+                                            children: [
+                                               Icon(
+                                                EneftyIcons.profile_bold,
+                                                color: AppColor.secondaryColor,
+                                                size: 22.sp,
+                                              ),
+                                              Text(
+                                                '${controller.details[0]['users_name']}',
+                                                style: TextStyle(
+                                                  color: AppColor.black,
+                                                  fontFamily: 'Cairo',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16.sp,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 1.h,
                                           ),
                                           Row(
                                             children: [
-                                              const Icon(
+                                               Icon(
                                                 EneftyIcons.location_bold,
                                                 color: AppColor.secondaryColor,
+                                                size: 22.sp,
                                               ),
-                                              Expanded(
-                                                child: Text(
-                                                  '${controller.details[0]['address_street'] == 'Throttled! See geocode.xyz/pricing' ? 'مكان غير معروف' : controller.details[0]['address_street']}',
-                                                  style: TextStyle(
-                                                    color: AppColor.black,
-                                                    fontFamily: 'ElMessiri',
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12.sp,
-                                                  ),
+                                              Text(
+                                                '${controller.details[0]['address_street'] == 'Throttled! See geocode.xyz/pricing' || controller.details[0]['address_street']=='null' ? '${controller.details[0]['users_city']}-${controller.details[0]['address_name']}' : '${controller.details[0]['users_city']}-${controller.details[0]['address_street']}'}',
+                                                style: TextStyle(
+                                                  color: AppColor.black,
+                                                  fontFamily: 'Cairo',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16.sp,
                                                 ),
                                               ),
+                                              SizedBox(width: 34.w,)
                                             ],
                                           ),
                                           SizedBox(
@@ -288,454 +676,390 @@ class OrdersDetails extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              Icon(
+                                               Icon(
                                                 EneftyIcons.call_calling_bold,
                                                 color: AppColor.secondaryColor,
+                                                 size: 22.sp,
                                               ),
-                                              Expanded(
-                                                child: Text(
-                                                  '${controller.details[0]['address_city']}',
-                                                  style: TextStyle(
-                                                    color: AppColor.black,
-                                                    fontFamily: 'ElMessiri',
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12.sp,
-                                                  ),
+                                              Text(
+                                                '${controller.details[0]['address_city']}',
+                                                style: TextStyle(
+                                                  color: AppColor.black,
+                                                  fontFamily: 'Cairo',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16.sp,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-          ),
-        ),
-        floatingActionButton: GetBuilder<OrdersControllerImp>(
-          builder: (controller) => controller.statusRequest ==
-                  StatusRequest.loading
-              ? Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
-                  child:
-                      YourShimmerWidget2(), // Replace with your shimmer widget
-                )
-              : Container(
-                  width: 100.w,
-                  child: Row(
-                    children: [
-                      SizedBox(width: 8.w),
-                      GestureDetector(
-                        onTap: () {
-                          myServices.sharedPreferences.setString("orders_id",
-                              "${controller.details[0]['orders_id']}");
-                          controller.details[0]['orders_status'] == 0 ||
-                                  controller.details[0]['orders_status'] == 1 ||
-                                  controller.details[0]['orders_status'] == 2
-                              ? controller.removeorder(
-                                  "${controller.details[0]['orders_id']}")
-                              : controller.details[0]['orders_status'] == 3
-                                  ? {
-                                      Get.to(TrackingScreen()),
-                                      controller.getDeliveryLocation(),
-                                    }
-                                  : print('ReOrder ');
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 7.h,
-                          width: 59.w,
-                          // controller.details[0]['orders_rating'] == 0 ? 60.w : 92.w,
-                          decoration: BoxDecoration(
-                            color: AppColor.secondaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: controller.details.isEmpty
-                              ? CircularProgressIndicator(
-                                  color: AppColor.secondaryColor,
-                                )
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GetBuilder<OrdersControllerImp>(
-                                      builder: (controller) => Text(
-                                        controller.details[0]
-                                                        ['orders_status'] ==
-                                                    0 ||
-                                                controller.details[0]
-                                                        ['orders_status'] ==
-                                                    1 ||
-                                                controller.details[0]
-                                                        ['orders_status'] ==
-                                                    2
-                                            ? 'إلغاء الأوردر'
-                                            : controller.details[0]
-                                                        ['orders_status'] ==
-                                                    3
-                                                ? 'تتبع الديلفري'
-                                                : 'طلب مرة أخرى',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          height: 0.2.h,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'ElMessiri',
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Icon(
-                                      EneftyIcons.shopping_cart_outline,
-                                      color: Colors.white,
-                                      size: 17.sp,
-                                    ),
-                                  ],
-                                ),
-                        ),
-                      ),
-                      SizedBox(width: 3.w),
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return StatefulBuilder(
-                                builder: (BuildContext context,
-                                    StateSetter setState) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      'ماهو تقييمك للأوردر',
-                                      textAlign: TextAlign.center,
-                                      textDirection: TextDirection.ltr,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        height: 0.2.h,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'ElMessiri',
-                                      ),
-                                    ),
-                                    content: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'أضف وصفًا إضافيًا هنا إذا كان لديك ملاحظات عن الأوردر أو موظف التوصيل',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 10.sp,
-                                              fontFamily: 'ElMessiri',
-                                              color: Colors.black87,
-                                            ),
+                                          SizedBox(
+                                            height: 1.h,
                                           ),
-                                          SizedBox(height: 20),
-                                          Image.asset(
-                                            controller.ratingImages[controller
-                                                    .selectedRating.value -
-                                                1],
-                                            height: 100,
-                                            width: 100,
-                                          ),
-                                          SizedBox(height: 20),
-                                          Directionality(
-                                            textDirection: TextDirection.rtl,
-                                            child: FittedBox(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children:
-                                                    List.generate(5, (index) {
-                                                  return IconButton(
-                                                    icon: Icon(
-                                                        index <
-                                                                controller
-                                                                    .selectedRating
-                                                                    .value
-                                                            ? Icons.star
-                                                            : Icons.star_border,
-                                                        color:
-                                                        AppColor.secondaryColor,
-                                                        size: 25.sp),
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        controller
-                                                            .selectedRating
-                                                            .value = index + 1;
-                                                      });
-                                                    },
-                                                  );
-                                                }),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(height: 20),
-                                          TextFormField(
-                                            controller: controller.comment,
-                                            decoration: InputDecoration(
-                                                hintText:
-                                                    'أكتب ملاحظاتك واقتراحاتك هنا',
-                                                hintTextDirection:
-                                                    TextDirection.rtl),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'إلغاء',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'ElMessiri',
-                                          ),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // //print(
-                                          //     'rating: ${controller.selectedRating.value}, comment: ${controller.commentController.text}');
 
-                                          if (controller.selectedRating.value <
-                                              3) {
-                                            // Handle low rating scenario
-                                          } else {
-                                            // Handle higher rating scenario
-                                          }
-
-                                          controller.rateorder();
-                                          Get.back();
-                                        },
-                                        child: Text(
-                                          'إرسال',
-                                          style: TextStyle(
-                                            color: AppColor.secondaryColor,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'ElMessiri',
-                                          ),
-                                        ),
+                                        ],
                                       ),
                                     ],
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 7.h,
-                          width: 30.w,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: AppColor.secondaryColor, width: 0.5.w),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            '⭐️ تقييم',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              color: Colors.black,
-                              height: 0.2.h,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'ElMessiri',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-        ),
-      ),
-    );
-  }
-}
-
-class YourShimmerWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.h,
-      width: 100.w,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 54.h,
-            width: 100.w,
-            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: ListView.separated(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 15.h,
-                    width: 90.w,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              height: 3.h,
-                              width: 35.w,
-                              color: Colors.blue,
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(
-                              height: 0.5.h,
-                            ),
-                            Container(
-                              height: 1.6.h,
-                              width: 20.w,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              height: 0.5.h,
-                            ),
-                            Container(
-                              height: 2.h,
-                              width: 25.w,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              height: 0.5.h,
-                            ),
-                            Container(
-                              height: 1.5.h,
-                              width: 15.w,
-                              color: Colors.blue,
+                              height: 13.h,
                             ),
                           ],
                         ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 3.w, 0),
-                          height: 12.h,
-                          width: 31.w,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10.sp),
-                          ),
-                        ),
+                    ),
+              ),
+            ),
+          ),
+        ),
+        floatingActionButton: GetBuilder<OrdersControllerImp>(
+          builder: (controller) {
+
+            if (controller.details.isNotEmpty) {
+                 return  Container(
+                   width: 100.w,
+                   child: controller.details[0]['orders_status'] == 0
+                       ? FittedBox(
+                     child: Row(
+                       children: [
+                         SizedBox(width: 8.w),
+                         GestureDetector(
+                           onTap: () {
+                             showDialog(
+                               context: context,
+                               builder: (BuildContext context) {
+                                 return Container(
+                                   width: 95.w,
+                                   child: AlertDialog(
+                                     backgroundColor: Colors.white,
+                                     shape: RoundedRectangleBorder(
+                                         borderRadius:
+                                         BorderRadius.circular(10.sp)),
+                                     content: Column(
+                                       mainAxisSize: MainAxisSize.min,
+                                       children: [
+                                         SizedBox(height: 10.0),
+                                         Text(
+                                           'هل أنت متأكد أنك تريد رفض هذا الأوردر ؟',
+                                           textAlign: TextAlign.center,
+                                           style: TextStyle(
+                                             fontSize: 11.sp,
+                                             color: Colors.black,
+                                             fontWeight: FontWeight.bold,
+                                             fontFamily: 'Cairo',
+                                           ),
+                                         ),
+                                         SizedBox(
+                                           height: 2.h,
+                                         ),
+                                         Row(
+                                           children: [
+                                             Expanded(
+                                               child: Container(
+                                                 height: 6.h,
+                                                 width: 20.w,
+                                                 child: ElevatedButton(
+                                                   onPressed: () {
+                                                     myServices.sharedPreferences.setString("orders_id",
+                                                         "${controller.details[0]['orders_id']}");
+
+                                                     controller.reject(
+                                                       '${myServices.sharedPreferences.getString("orders_id")}',
+                                                       '${myServices.sharedPreferences.getString("orders_usersid")}',
+                                                     );
+                                                   },
+                                                   style: ElevatedButton
+                                                       .styleFrom(
+                                                     backgroundColor:
+                                                    Colors.red,
+                                                     shape:
+                                                     RoundedRectangleBorder(
+                                                       borderRadius:
+                                                       BorderRadius
+                                                           .circular(10.0),
+                                                     ),
+                                                   ),
+                                                   child: Text(
+                                                     'نعم',
+                                                     style: TextStyle(
+                                                       fontSize: 10.sp,
+                                                       color: Colors.white,
+                                                       fontWeight:
+                                                       FontWeight.bold,
+                                                       fontFamily: 'Cairo',
+                                                     ),
+                                                   ),
+                                                 ),
+                                               ),
+                                             ),
+                                             SizedBox(
+                                               width: 5.w,
+                                             ),
+                                             Expanded(
+                                               child: GestureDetector(
+                                                 onTap: () {
+                                                   Get.back();
+                                                 },
+                                                 child: Container(
+                                                   alignment: Alignment.center,
+                                                   height: 6.h,
+                                                   width: 20.w,
+                                                   decoration: BoxDecoration(
+                                                       borderRadius:
+                                                       BorderRadius
+                                                           .circular(10),
+                                                       border: Border.all(
+                                                         color:
+                                                         AppColor.primaryColor,
+                                                         width: 0.3.h,
+                                                       )),
+                                                   child: Text(
+                                                     'لا',
+                                                     style: TextStyle(
+                                                       color:
+                                                       AppColor.primaryColor,
+                                                       height: 0.2.h,
+                                                       fontSize: 15.sp,
+                                                       fontWeight:
+                                                       FontWeight.bold,
+                                                       fontFamily: 'Cairo',
+                                                     ),
+                                                   ),
+                                                 ),
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       ],
+                                     ),
+                                   ),
+                                 );
+                               },
+                             );
+                           },
+                           child: Container(
+                             alignment: Alignment.center,
+                             height: 7.h,
+                             width: 45.w,
+                             // controller.details[0]['orders_rating'] == 0 ? 60.w : 92.w,
+                             decoration: BoxDecoration(
+                               color: AppColor.secondaryColor,
+                               borderRadius: BorderRadius.circular(10),
+                             ),
+                             child: controller.details.isEmpty
+                                 ? CircularProgressIndicator(
+                               color: AppColor.secondaryColor,
+                             )
+                                 : Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 GetBuilder<OrdersControllerImp>(
+                                   builder: (controller) => Text(
+                                     'رفض الأوردر',
+                                     style: TextStyle(
+                                       color: Colors.white,
+                                       height: 0.2.h,
+                                       fontSize: 12.sp,
+                                       fontWeight: FontWeight.bold,
+                                       fontFamily: 'Cairo',
+                                     ),
+                                   ),
+                                 ),
+                                 SizedBox(
+                                   width: 2.w,
+                                 ),
+                                 Icon(
+                                   EneftyIcons.shopping_cart_outline,
+                                   color: Colors.white,
+                                   size: 17.sp,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         SizedBox(width: 3.w),
+                         GestureDetector(
+                           onTap: () {
+                             myServices.sharedPreferences.setString("orders_id",
+                                 "${controller.details[0]['orders_id']}");
+
+                             controller.approve(
+                               '${myServices.sharedPreferences.getString("orders_id")}',
+                               '${myServices.sharedPreferences.getString("orders_usersid")}',
+                             );
+                           },
+                           child: Container(
+                             alignment: Alignment.center,
+                             height: 7.h,
+                             width: 45.w,
+                             // controller.details[0]['orders_rating'] == 0 ? 60.w : 92.w,
+                             decoration: BoxDecoration(
+                               color: AppColor.secondaryColor,
+                               borderRadius: BorderRadius.circular(10),
+                             ),
+                             child: controller.details.isEmpty
+                                 ? CircularProgressIndicator(
+                               color: AppColor.secondaryColor,
+                             )
+                                 : Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 GetBuilder<OrdersControllerImp>(
+                                   builder: (controller) => Text(
+                                     'قبول الأوردر',
+                                     style: TextStyle(
+                                       color: Colors.white,
+                                       height: 0.2.h,
+                                       fontSize: 12.sp,
+                                       fontWeight: FontWeight.bold,
+                                       fontFamily: 'Cairo',
+                                     ),
+                                   ),
+                                 ),
+                                 SizedBox(
+                                   width: 2.w,
+                                 ),
+                                 Icon(
+                                   EneftyIcons.shopping_cart_outline,
+                                   color: Colors.white,
+                                   size: 17.sp,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                       ],
+                     ),
+                   )
+                       : controller.details[0]['orders_status'] == 1
+                       ? GestureDetector(
+                     onTap: () {
+                       myServices.sharedPreferences.setString("orders_id",
+                           "${controller.details[0]['orders_id']}");
+
+                       controller.prepare(
+                         '${myServices.sharedPreferences.getString("orders_id")}',
+                         '${myServices.sharedPreferences.getString("orders_usersid")}',
+                       );
+                     },
+                     child: Container(
+                       alignment: Alignment.center,
+                       height: 7.h,
+                       margin: EdgeInsets.only(right: 9.w),
+                       decoration: BoxDecoration(
+                         color: AppColor.secondaryColor,
+                         borderRadius: BorderRadius.circular(10),
+                       ),
+                       child: controller.details.isEmpty
+                           ? CircularProgressIndicator(
+                         color: AppColor.secondaryColor,
+                       )
+                           : Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           GetBuilder<OrdersControllerImp>(
+                             builder: (controller) => Text(
+                               'انتهاء التحضير',
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 height: 0.2.h,
+                                 fontSize: 12.sp,
+                                 fontWeight: FontWeight.bold,
+                                 fontFamily: 'Cairo',
+                               ),
+                             ),
+                           ),
+                           SizedBox(
+                             width: 2.w,
+                           ),
+                           Icon(
+                             EneftyIcons.shopping_cart_outline,
+                             color: Colors.white,
+                             size: 17.sp,
+                           ),
+                         ],
+                       ),
+                     ),
+                   )
+                       : controller.details[0]['orders_status'] == 2 || controller.details[0]['orders_status'] == 3
+                       ? GestureDetector(
+                     onTap: () {
+                       myServices.sharedPreferences.setString(
+                           "orders_id",
+                           "${controller.details[0]['orders_id']}");
+
+                       // controller.prepare(
+                       //   '${myServices.sharedPreferences.getString(
+                       //       "orders_id")}',
+                       //   '${myServices.sharedPreferences.getString(
+                       //       "orders_usersid")}',
+                       // );
+                     },
+                     child: Container(
+                       alignment: Alignment.center,
+                       height: 7.h,
+                       margin: EdgeInsets.only(right: 9.w),
+                       decoration: BoxDecoration(
+                         color: AppColor.secondaryColor,
+                         borderRadius: BorderRadius.circular(10),
+                       ),
+                       child: controller.details.isEmpty
+                           ? CircularProgressIndicator(
+                         color: AppColor.secondaryColor,
+                       )
+                           : Row(
+                         mainAxisAlignment:
+                         MainAxisAlignment.center,
+                         children: [
+                           GetBuilder<OrdersControllerImp>(
+                             builder: (controller) => Text(
+                               'تتبع الديلفري ',
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 height: 0.2.h,
+                                 fontSize: 12.sp,
+                                 fontWeight: FontWeight.bold,
+                                 fontFamily: 'Cairo',
+                               ),
+                             ),
+                           ),
+                           SizedBox(
+                             width: 2.w,
+                           ),
+                           Icon(
+                             EneftyIcons.car_outline,
+                             color: Colors.white,
+                             size: 17.sp,
+                           ),
+                         ],
+                       ),
+                     ),
+                   )
+                       : SizedBox(),
+                 );
+            }else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(',Sorry, something went wrong'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                            onTap: (){Get.off(OrdersScreen());},
+                            child: Text('try again',style: TextStyle(fontWeight: FontWeight.bold),)),
+                        Text(' Please'),
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.sp),
-                        border: Border.all(color: Colors.blue, width: 0.4.w)),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: 1.5.h,
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(2.w, 1.h, 5.w, 0),
-            child: Container(
-              height: 3.h,
-              width: 30.w,
-              color: Colors.blue,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(4.w, 1.h, 4.w, 0),
-            height: 18.h,
-            width: 100.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.sp),
-              border: Border.all(
-                color: Colors.black54,
-                width: 0.2.w,
-              ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 3.w, 0),
-                    height: 14.h,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10.sp),
-                    ),
-                  ),
+                  ],
                 ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 3.h,
-                            width: 40.w,
-                            color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 2.h,
-                            width: 30.w,
-                            color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 2.h,
-                            width: 25.w,
-                            color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+              );
+            }
+
+          }
+      ),
       ),
     );
   }

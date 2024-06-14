@@ -27,6 +27,6 @@ class AppColor {
   static const Color red = Color(0xffE50909);
 
   static const Color orangeFun1 = Color(0xffbbd469);
-  
+
   static const Color orangeFun2 = Color(0xfff7b733);
 }

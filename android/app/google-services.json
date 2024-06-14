@@ -1,22 +1,21 @@
 {
   "project_info": {
-    "project_number": "991355742822",
-    "firebase_url": "https://yumyum-6c1ea-default-rtdb.firebaseio.com",
-    "project_id": "yumyum-6c1ea",
-    "storage_bucket": "yumyum-6c1ea.appspot.com"
+    "project_number": "157530424087",
+    "project_id": "wasena-94790",
+    "storage_bucket": "wasena-94790.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:991355742822:android:f745cfa13bf69966f05ba7",
+        "mobilesdk_app_id": "1:157530424087:android:d3e585fc7d26258ea22d52",
         "android_client_info": {
-          "package_name": "com.example.yumyum"
+          "package_name": "com.example.wasena2"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+          "current_key": "AIzaSyBfncb4z-iJt-sDcfNa2Bivw96SnjOTy3o"
         }
       ],
       "services": {
@@ -27,7 +26,26 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:991355742822:android:e8fb8bc04ab04830f05ba7",
+        "mobilesdk_app_id": "1:157530424087:android:0488b497a42a0700a22d52",
+        "android_client_info": {
+          "package_name": "com.example.wasena_final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfncb4z-iJt-sDcfNa2Bivw96SnjOTy3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157530424087:android:a01064f1116034d3a22d52",
         "android_client_info": {
           "package_name": "com.example.yumyumadmin"
         }
@@ -35,7 +53,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+          "current_key": "AIzaSyBfncb4z-iJt-sDcfNa2Bivw96SnjOTy3o"
         }
       ],
       "services": {
@@ -46,15 +64,34 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:991355742822:android:15efb08cc771e90df05ba7",
+        "mobilesdk_app_id": "1:157530424087:android:e87ee88c45afd2a7a22d52",
         "android_client_info": {
-          "package_name": "com.example.wasena"
+          "package_name": "com.wasenaadmin2.com"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCTh4RXEAwZ7AsiMN5zirjc9rZDFLl6HDI"
+          "current_key": "AIzaSyBfncb4z-iJt-sDcfNa2Bivw96SnjOTy3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157530424087:android:7aeac906eb428b44a22d52",
+        "android_client_info": {
+          "package_name": "com.wasenadelivery2.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfncb4z-iJt-sDcfNa2Bivw96SnjOTy3o"
         }
       ],
       "services": {

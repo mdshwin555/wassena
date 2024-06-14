@@ -1,64 +1,23 @@
 class AppImageAsset {
-
   static const String rootImages = "assets/images";
   static const String rootLottie = "assets/lottie";
   // =============================== Images ========================== //
-  static const String logo = "$rootImages/icon.png";
-  static const String logoIntro = "$rootImages/logoIntro.png";
+  static const String logo = "$rootImages/yumyum.png";
+  static const String err = "$rootImages/yumyum.png";
   static const String splash = "$rootImages/splash.jpeg";
-  static const String pizzaorder = "$rootImages/pizzaorder.jpg";
-  static const String burgerorder = "$rootImages/burgerorder.jpg";
-  static const String offer = "$rootImages/new-offer.png";
-  static const String sweet = "$rootImages/sweet.png";
-  static const String notification = "$rootImages/notification.png";
-  static const String star = "$rootImages/star.png";
-  static const String alarm = "$rootImages/3d-alarm.png";
-  static const String motorbike = "$rootImages/motorbike.png";
-  static const String delivery = "$rootImages/delivery-man.png";
-  static const String bagadd = "$rootImages/shopping-bag-add (1).png";
-  static const String addtocart = "$rootImages/addtocart.png";
-  static const String wallpaper = "$rootImages/wallpaper.jpg";
-  static const String splashfastmart = "$rootImages/splashfastmart.gif";
-  static const String shimmarimageeror = "$rootImages/loadingError.jpg";
-  static const String loadingimage = "$rootImages/loadingimage.jpg";
-  static const String joinus = "$rootImages/joinus.png";
-  static const String appicon = "$rootImages/appicon.png";
-  static const String contact_us = "$rootImages/contact_us.png";
-  static const String facebook = "$rootImages/facebook.png";
-  static const String whatsapp = "$rootImages/whatsapp.png";
-  static const String phone = "$rootImages/phone.png";
-
-  static const String onboarding1 = "$rootImages/onboarding1.png";
-  static const String onboarding2 = "$rootImages/onboarding2.png";
-  static const String onboarding3 = "$rootImages/onboarding3.png";
-
-
-  //rating
-  static const String sad = "$rootImages/sad.png";
-  static const String notgood = "$rootImages/notgood.png";
-  static const String good = "$rootImages/good.png";
-  static const String excellent = "$rootImages/excellent.png";
-  static const String outstanding = "$rootImages/outstanding.png";
-
+  static const String notification = "$rootImages/ae8328ccc908907fd6e1b87c5d9c1d95.jpg";
+  static const String reports = "$rootImages/f00f329335e291e6ec2ce173d5ac6aba.jpg";
+  static const String orders = "$rootImages/ede075e6de63a2c3d67ab90151c8ae1e.jpg";
+  static const String items = "$rootImages/92a5eb6d18bef810abe3679f56cf5389.jpg";
+  static const String catigories = "$rootImages/96c2445d6014b706f25daaf740183377.jpg";
+  static const String users = "$rootImages/9035ba5f2859eed1bc1f8b88f711a1ca.jpg";
+  static const String restaurants = "$rootImages/restaurants.jpg";
 
   // =============================== Lottie ========================== //
   static const String loading = "$rootLottie/loading2.json";
   static const String loading3 = "$rootLottie/loading3.json";
   static const String noorders = "$rootLottie/noorders2.json";
   static const String ordersuccssecful = "$rootLottie/ordersuccssecful.json";
-  static const String nostore = "$rootLottie/nostore.json";
-  static const String emptyitems = "$rootLottie/emptyitems.json";
-  static const String loadingmap = "$rootLottie/loadingmap.json";
+  static const String emptyitems = "$rootLottie/noorders3.json";
   static const String emptyaddress = "$rootLottie/emptyaddress.json";
-  static const String nonotifications = "$rootLottie/nonotifications.json";
-  static const String emptycart = "$rootLottie/emptycart.json";
-  static const String emptyorders = "$rootLottie/emptyorders.json";
-  static const String emptyrestaurants = "$rootLottie/emptyrestaurants.json";
-  static const String emptyfavorite = "$rootLottie/emptyfavorite.json";
-  static const String motor = "$rootLottie/motor.json";
-  static const String dotsloading = "$rootLottie/dotsloading.json";
-  static const String marker = "$rootLottie/marker.json";
-  static const String deliverybike = "$rootLottie/deliverybike.json";
-  static const String shopping = "$rootLottie/shopping.json";
-  static const String offers = "$rootLottie/offers.json";
 }

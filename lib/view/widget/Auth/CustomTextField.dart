@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
                 color: Colors.black,
                 height: 0.2.h,
                 fontSize: 13.sp,
-                fontFamily: 'ElMessiri',
+                fontFamily: 'Cairo',
                 letterSpacing: 1,
                 fontWeight: FontWeight.w500,
               ),
@@ -49,13 +49,6 @@ class CustomTextField extends StatelessWidget {
               controller: textfieldcontroller,
               keyboardType: keyboardType,
               maxLength: 10,
-              cursorColor: AppColor.secondaryColor,
-              style: TextStyle( // Define the TextStyle for the entered text
-                fontFamily: 'ElMessiri',
-                fontSize: 11.sp,
-                color: Colors.black, // Customize color as needed
-                // Add other style properties as needed
-              ),
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding:
@@ -76,15 +69,11 @@ class CustomTextField extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: AppColor.red),
                 ),
-                errorStyle: TextStyle(
-                  fontFamily: 'ElMessiri',
-                    fontSize: 8.sp
-                ),
                 hintText: hintText,
                 hintStyle: TextStyle(
                   height: 0.2.h,
                   fontSize: 11.sp,
-                  fontFamily: 'ElMessiri',
+                  fontFamily: 'Cairo',
                   letterSpacing: 1,
                 ),
               ),

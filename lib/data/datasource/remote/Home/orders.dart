@@ -7,98 +7,26 @@ class OrdersData {
 
   OrdersData(this.crud);
 
-  checkout(
-      String usersid,
-      String addressid,
-      String orderstype,
-      String    pricedelivery,
-      String    ordersprice,
-      String    couponid,
-      String paymentmethod,
-      String    coupondiscount,
-      String    rating,
-      String    comment,
-      String    description,
-      String    orders_datetime,
-      ) async {
-    var response = await crud.postData(AppLink.checkout, {
-      "usersid": usersid,
-      "addressid": addressid,
-      "orderstype": orderstype,
-      "pricedelivery": pricedelivery,
-      "ordersprice": ordersprice,
-      "couponid": couponid,
-      "paymentmethod": paymentmethod,
-      "coupondiscount": coupondiscount,
-      "rating": rating,
-      "comment": comment,
-      "description": description,
-      "orders_datetime": orders_datetime,
-    }, {});
+  getpending() async {
+    var response = await crud.postData(AppLink.pending, {}, {});
     return response.fold((l) => l, (r) => r);
   }
 
-  rateorders(
-      String id,
-      String rating,
-      String comment,
-
-      ) async {
-    var response = await crud.postData(AppLink.rating, {
-      "id": id,
-      "rating": rating,
-      "comment": comment,
-    }, {});
+  getpreparing() async {
+    var response = await crud.postData(AppLink.getpreparing, {}, {});
     return response.fold((l) => l, (r) => r);
   }
 
-  removedata(
-      String usersid,
-      String itemsid,
-      ) async {
-    var response = await crud.postData(AppLink.removefromcart, {
-      "usersid": usersid,
-      "itemsid": itemsid,
-    }, {});
+  getonway() async {
+    var response = await crud.postData(AppLink.getonway, {}, {});
     return response.fold((l) => l, (r) => r);
   }
 
-
-  removeorder(
-      String orderid,
-      ) async {
-    var response = await crud.postData(AppLink.removeorder, {
-      "id": orderid,
-    }, {});
+  getarchive() async {
+    var response = await crud.postData(AppLink.getarchive, {}, {});
     return response.fold((l) => l, (r) => r);
   }
 
-  getPinding(
-      String usersid,
-      ) async {
-    var response = await crud.postData(AppLink.pinding, {
-      "id": usersid,
-    }, {});
-    return response.fold((l) => l, (r) => r);
-  }
-
-  getOnWay(
-      String usersid,
-      ) async {
-    var response = await crud.postData(AppLink.onway, {
-      "id": usersid,
-    }, {});
-    return response.fold((l) => l, (r) => r);
-  }
-
-  getArchive(
-      String usersid,
-      ) async {
-    var response = await crud.postData(AppLink.archive, {
-      "id": usersid,
-    }, {});
-    return response.fold((l) => l, (r) => r);
-  }
 
   getdetails(
       String ordersid,
@@ -108,4 +36,81 @@ class OrdersData {
     }, {});
     return response.fold((l) => l, (r) => r);
   }
+
+
+  approve(
+      String ordersid,
+      String usersid,
+
+      ) async {
+    var response = await crud.postData(AppLink.approve, {
+      "ordersid": ordersid,
+      "usersid": usersid,
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
+  prepare(
+      String ordersid,
+      String usersid,
+
+      ) async {
+    var response = await crud.postData(AppLink.prepare, {
+      "ordersid": ordersid,
+      "usersid": usersid,
+      "ordertype": "0",
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
+  reject(
+      String ordersid,
+      String usersid,
+
+      ) async {
+    var response = await crud.postData(AppLink.reject, {
+      "ordersid": ordersid,
+      "usersid": usersid,
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
+
+  additem(
+      String usersid,
+      String itemsid,
+      String orderid,
+      ) async {
+    var response = await crud.postData(AppLink.additem, {
+      "usersid": usersid,
+      "itemsid": itemsid,
+      "orderid": orderid,
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
+  updateDeliveryPriceOrder(
+      String order_id,
+      String new_delivery_price,
+      ) async {
+    var response = await crud.postData(AppLink.new_delivery_price, {
+      "order_id": order_id,
+      "new_delivery_price": new_delivery_price,
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
+  removeitem(
+      String usersid,
+      String itemsid,
+      String orderid,
+      ) async {
+    var response = await crud.postData(AppLink.removeitem, {
+      "usersid": usersid,
+      "itemsid": itemsid,
+      "orderid": orderid,
+    }, {});
+    return response.fold((l) => l, (r) => r);
+  }
+
 }

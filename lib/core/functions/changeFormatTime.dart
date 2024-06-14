@@ -20,7 +20,7 @@
 // }
 //
 // String getHours(String time) {
-//   //print(DateFormat('HH:mm:ss').parse(time).hour);
+//   // print(DateFormat('HH:mm:ss').parse(time).hour);
 //   int res = 0;
 //   if (DateFormat('HH:mm:ss').parse(time).hour - DateTime.now().hour > 0) {
 //     res = DateFormat('HH:mm:ss').parse(time).hour - DateTime.now().hour-1;

@@ -16,60 +16,57 @@ dependencies:
   http:
   get:
   sizer:
+  animated_splash_screen:
   lottie:
   animated_bottom_navigation_bar:
   enefty_icons:
   flutter_slidable:
   shared_preferences:
   dartz:
-#  awesome_dialog:
+  awesome_dialog:
   carousel_slider:
-#  cached_network_image:
+  cached_network_image:
   google_maps_flutter:
+  geolocator:
   geocoding:
   flutter_polyline_points:
-  badges:
-  jiffy: ^6.2.2
+  jiffy:
   url_launcher:
   rating_dialog:
+  firebase_auth:
   firebase_core:
   firebase_messaging:
   firebase_storage:
-  geolocator:
   cloud_firestore:
+  image_picker:
+  day_night_time_picker: ^1.3.0+1
   intl:
-  shimmer:
   searchfield:
   geocode:
+  shimmer:
+  flutter_launcher_icons:
   shimmer_image:
-  animated_text_kit:
-  awesome_notifications:
-  in_app_review:
-  share_plus:
-  showcaseview:
-  pinput:
-  flutter_launcher_icons: ^0.13.1
-  audioplayers: ^6.0.0
-
+  badges: ^3.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.11.0"
+
 flutter_icons:
   android: true
+  ios: true
   image_path: "assets/images/appicon.png"
   adaptive_icon_background: "#ffffff"
   adaptive_icon_foreground: "assets/images/2024.png"
-
+  flutter_lints: ^2.0.0
 
   flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/appicon.png"
-
-
+  image_path: "assets/images/adminicon.jpg"
 
 
 flutter:
@@ -79,13 +76,16 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
-    - assets/audios/
 
   fonts:
-    - family: ElMessiri
+    - family: Cairo
       fonts:
-        - asset: assets/fonts/ElMessiri-VariableFont_wght.ttf
-    - family: ProtestRiot
-      fonts:
-        - asset: assets/fonts/ProtestRiot-Regular.ttf
+        - asset: assets/fonts/Cairo-Black.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+        - asset: assets/fonts/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-SemiBold.ttf
 
